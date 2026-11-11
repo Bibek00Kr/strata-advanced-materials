@@ -45,18 +45,6 @@ const categories = [
 ];
 
 const pageCopy = {
-  materials: {
-    kicker: 'Materials',
-    title: 'A deeper set of materials to explore.',
-    intro: 'Find advanced material families for energy storage, electrochemistry and emerging research. Tell us your application and we can help narrow the options.',
-    detail: 'Material availability, specifications and quantities can be discussed around your project requirements.',
-    offers: [
-      ['Graphene & related materials', 'Explore carbon-based materials for conductive networks, composites and electrochemical studies.'],
-      ['MXenes', 'Two-dimensional transition-metal carbides and nitrides for research into energy storage and functional materials.'],
-      ['LDHs & MOFs', 'Layered double hydroxides and metal–organic frameworks for tunable composition and structure.'],
-      ['Heterostructures', 'Combined material systems designed for investigation of interfaces and complementary properties.'],
-    ],
-  },
   consumables: {
     kicker: 'Consumables',
     title: 'Keep the experiment in motion.',
@@ -94,6 +82,14 @@ const pageCopy = {
     ],
   },
 };
+
+const materialProducts = [
+  { id: 'graphene', family: 'Graphene', name: 'Graphene & related materials', type: 'Carbon nanomaterials', description: 'Graphene family materials for research into conductive networks, composites and electrochemical systems.', symbol: 'G', visual: 'graphene' },
+  { id: 'mxenes', family: 'MXenes', name: 'MXene materials', type: '2D materials', description: 'Two-dimensional carbide and nitride materials for energy storage and functional materials research.', symbol: 'M', visual: 'mxene' },
+  { id: 'ldhs', family: 'LDHs', name: 'Layered double hydroxides', type: 'Layered materials', description: 'Layered hydroxide material families for catalyst, electrode and materials studies.', symbol: 'L', visual: 'ldh' },
+  { id: 'mofs', family: 'MOFs', name: 'Metal–organic frameworks', type: 'Porous materials', description: 'Framework materials with tuneable composition for research and development applications.', symbol: 'F', visual: 'mof' },
+  { id: 'heterostructures', family: 'Heterostructures', name: 'Material heterostructures', type: 'Composite systems', description: 'Combined material systems for investigating interfaces and complementary properties.', symbol: 'H', visual: 'hetero' },
+];
 
 function Brand({ onClick }) {
   return (
@@ -134,22 +130,29 @@ function MaterialArtwork() {
   );
 }
 
-function SiteHeader({ active, menuOpen, setMenuOpen }) {
+function SiteHeader({ active, menuOpen, setMenuOpen, cartCount, onOpenCart }) {
   const close = () => setMenuOpen(false);
   return (
-    <header className="site-header">
+    <header className={`site-header ${menuOpen ? 'menu-active' : ''}`}>
       <div className="header-inner">
         <Brand onClick={close} />
-        <button className={`menu-toggle ${menuOpen ? 'is-open' : ''}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
-          <span /><span />
-        </button>
-        <nav className={`main-nav ${menuOpen ? 'nav-open' : ''}`} aria-label="Main navigation">
+        <div className="header-controls">
+          <button className="basket-button mobile-basket" onClick={onOpenCart} aria-label={`Open basket, ${cartCount} ${cartCount === 1 ? 'item' : 'items'}`}><BasketIcon /><span>{cartCount}</span></button>
+          <button className={`menu-toggle ${menuOpen ? 'is-open' : ''}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-navigation" aria-label={menuOpen ? 'Close menu' : 'Open menu'}><span /><span /></button>
+        </div>
+        <nav id="main-navigation" className={`main-nav ${menuOpen ? 'nav-open' : ''}`} aria-label="Main navigation">
           {navigation.map(([id, label]) => <a key={id} href={`#${id}`} onClick={close} className={active === id ? 'active' : ''}>{label}</a>)}
+          <button className="basket-button desktop-basket" onClick={() => { close(); onOpenCart(); }}><BasketIcon /> Basket <span>{cartCount}</span></button>
           <a className="nav-enquiry" href="#enquiry" onClick={close}>Start an enquiry <Arrow diagonal /></a>
         </nav>
       </div>
+      <button className={`menu-scrim ${menuOpen ? 'is-visible' : ''}`} onClick={close} aria-label="Close navigation menu" tabIndex={menuOpen ? 0 : -1} />
     </header>
   );
+}
+
+function BasketIcon() {
+  return <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 8h16l-1.4 12H5.4L4 8Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="m8 9 4-6 4 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>;
 }
 
 function Eyebrow({ children }) {
@@ -167,25 +170,54 @@ function CategoryCard({ item }) {
   );
 }
 
-function HomePage() {
+function ProductArt({ product }) {
+  return <div className={`product-art art-${product.visual}`} aria-hidden="true"><span>{product.symbol}</span><i /><i /><i /><b /></div>;
+}
+
+function ProductCard({ product, inBasket, onAdd }) {
+  return (
+    <article className="product-card">
+      <ProductArt product={product} />
+      <div className="product-card-body">
+        <div className="product-meta"><span>{product.type}</span><span className="quote-badge">Request pricing</span></div>
+        <h3>{product.name}</h3>
+        <p>{product.description}</p>
+        <div className="product-card-footer"><span className="product-family">{product.family}</span><button className={`add-button ${inBasket ? 'added' : ''}`} onClick={() => onAdd(product.id)}>{inBasket ? 'In basket' : 'Add to basket'} <Arrow /></button></div>
+      </div>
+    </article>
+  );
+}
+
+function FeaturedProducts({ basketIds, onAddToBasket }) {
+  return (
+    <section className="featured-shop page-wrap">
+      <div className="shop-section-head"><div><Eyebrow>Shop materials</Eyebrow><h2>Find your material<br /><em>starting point.</em></h2></div><a className="under-link" href="#materials">Browse all materials <Arrow /></a></div>
+      <div className="featured-product-grid">{materialProducts.slice(0, 3).map((product) => <ProductCard key={product.id} product={product} inBasket={basketIds.includes(product.id)} onAdd={onAddToBasket} />)}</div>
+    </section>
+  );
+}
+
+function HomePage({ basketIds, onAddToBasket }) {
   return (
     <>
       <main>
         <section className="home-hero page-wrap">
           <div className="hero-copy">
-            <Eyebrow>Advanced materials · Electrochemistry · Energy storage</Eyebrow>
-            <h1>From material<br />to <span>momentum.</span></h1>
-            <p className="hero-intro">Advanced materials and electrochemical support for the people turning research into what comes next.</p>
-            <div className="hero-actions"><a className="button button-dark" href="#materials">Explore our capabilities <Arrow /></a><a className="text-link" href="#about">Meet Strata <Arrow diagonal /></a></div>
-            <div className="hero-note"><span className="note-rule" />Material insight. Practical collaboration.</div>
+            <Eyebrow>Advanced materials · Made for research</Eyebrow>
+            <h1>Materials for<br />what comes <span>next.</span></h1>
+            <p className="hero-intro">Explore advanced material families for electrochemistry, energy storage and materials research. Tell us what you need and request a tailored quote.</p>
+            <div className="hero-actions"><a className="button button-dark" href="#materials">Shop material families <Arrow /></a><a className="text-link" href="#about">Meet Strata <Arrow diagonal /></a></div>
+            <div className="hero-note"><span className="note-rule" />Select a material. Request your grade and quantity.</div>
           </div>
           <MaterialArtwork />
           <div className="hero-index"><span>01</span><span className="index-line" /><span>04</span></div>
         </section>
 
+        <FeaturedProducts basketIds={basketIds} onAddToBasket={onAddToBasket} />
+
         <section className="intro-band page-wrap">
-          <div className="section-label"><span>01 — WHAT WE DO</span><span>SCROLL TO EXPLORE ↓</span></div>
-          <div className="intro-grid"><h2>Good research needs<br /><em>the right building blocks.</em></h2><div><p>Strata Advanced Materials brings material supply, laboratory consumables, electrochemical testing and R&amp;D services together in one place.</p><a className="under-link" href="#about">A little about us <Arrow /></a></div></div>
+          <div className="section-label"><span>01 — WHY STRATA</span><span>SCROLL TO EXPLORE ↓</span></div>
+          <div className="intro-grid"><h2>Good research needs<br /><em>the right building blocks.</em></h2><div><p>Browse material families, share the grade and quantity you need, and bring the details together in one quote request.</p><a className="under-link" href="#about">A little about us <Arrow /></a></div></div>
         </section>
 
         <section className="capabilities-section page-wrap" id="capabilities">
@@ -219,6 +251,53 @@ function CategoryPage({ id }) {
   );
 }
 
+function MaterialsShop({ basketIds, onAddToBasket }) {
+  const [search, setSearch] = useState('');
+  const [family, setFamily] = useState('All materials');
+  const [sort, setSort] = useState('featured');
+  const families = ['All materials', ...materialProducts.map((product) => product.family)];
+  const visibleProducts = materialProducts
+    .filter((product) => family === 'All materials' || product.family === family)
+    .filter((product) => `${product.name} ${product.type} ${product.description}`.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name) : materialProducts.indexOf(a) - materialProducts.indexOf(b));
+
+  return (
+    <main className="inner-page shop-page page-wrap">
+      <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Materials</span></div>
+      <section className="shop-heading">
+        <div><Eyebrow>Material catalogue</Eyebrow><h1>Shop materials.</h1><p>Browse the material families, add your selections to the basket and request pricing for your required grade and quantity.</p></div>
+        <div className="shop-promise"><span>01 / SELECT</span><span>02 / SPECIFY</span><span>03 / GET A QUOTE</span></div>
+      </section>
+      <section className="catalogue" aria-label="Material catalogue">
+        <div className="catalogue-tools">
+          <label className="catalogue-search"><span aria-hidden="true">⌕</span><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search materials" aria-label="Search materials" /></label>
+          <label className="sort-label">Sort by <select value={sort} onChange={(event) => setSort(event.target.value)}><option value="featured">Featured</option><option value="name">Name A–Z</option></select></label>
+        </div>
+        <div className="filter-row" aria-label="Filter by material family">{families.map((item) => <button key={item} className={`filter-chip ${family === item ? 'selected' : ''}`} onClick={() => setFamily(item)} aria-pressed={family === item}>{item}</button>)}</div>
+        <div className="catalogue-count">Showing {visibleProducts.length} {visibleProducts.length === 1 ? 'material family' : 'material families'} <span>Pricing and availability confirmed by quote</span></div>
+        {visibleProducts.length ? <div className="product-grid">{visibleProducts.map((product) => <ProductCard key={product.id} product={product} inBasket={basketIds.includes(product.id)} onAdd={onAddToBasket} />)}</div> : <div className="no-products"><h2>No materials match that search.</h2><p>Try another material name or clear the selected filter.</p><button className="text-link" onClick={() => { setSearch(''); setFamily('All materials'); }}>Clear filters <Arrow /></button></div>}
+        <div className="catalogue-footnote"><span className="footnote-mark">i</span><p>Material grades, forms, quantities, lead times and pricing are confirmed for each request. Add items to your basket and include the details you need in the quote request.</p></div>
+      </section>
+      <section className="page-bottom-cta"><div><span>NEED HELP CHOOSING?</span><h2>Tell us about your application.</h2></div><a className="button button-lime" href="#enquiry">Ask our team <Arrow diagonal /></a></section>
+    </main>
+  );
+}
+
+function BasketDrawer({ open, cart, onClose, onRemove, onSetAmount }) {
+  const rows = cart.map((item) => ({ ...materialProducts.find((product) => product.id === item.id), amount: item.amount || '' })).filter((product) => product.id);
+  return (
+    <div className={`basket-overlay ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+      <button className="basket-scrim" onClick={onClose} tabIndex={open ? 0 : -1} aria-label="Close basket" />
+      <aside className="basket-drawer" role="dialog" aria-modal="true" aria-label="Your material basket">
+        <div className="basket-header"><div><Eyebrow>Your selection</Eyebrow><h2>Basket <span>({rows.length})</span></h2></div><button className="basket-close" onClick={onClose} aria-label="Close basket">×</button></div>
+        <p className="basket-explainer">No prices are shown until we confirm the material grade, form and quantity you need.</p>
+        <div className="basket-items">{rows.length ? rows.map((product) => <article className="basket-item" key={product.id}><ProductArt product={product} /><div className="basket-item-main"><span>{product.family}</span><h3>{product.name}</h3><label>Required amount <input value={product.amount} onChange={(event) => onSetAmount(product.id, event.target.value)} placeholder="e.g. 5 g or 100 mL" /></label></div><button className="remove-item" onClick={() => onRemove(product.id)} aria-label={`Remove ${product.name}`}>×</button></article>) : <div className="basket-empty"><span className="empty-basket-icon"><BasketIcon /></span><h3>Your basket is empty</h3><p>Add material families to start a quote request.</p><button className="text-link" onClick={() => { onClose(); window.location.hash = 'materials'; }}>Browse materials <Arrow /></button></div>}</div>
+        <div className="basket-bottom"><p><span>Next step</span> We’ll confirm pricing and availability with you.</p><button className="button button-dark" disabled={!rows.length} onClick={() => { onClose(); window.location.hash = 'enquiry'; }}>Request a quote <Arrow diagonal /></button></div>
+      </aside>
+    </div>
+  );
+}
+
 function AboutPage() {
   return (
     <main className="inner-page page-wrap">
@@ -230,14 +309,18 @@ function AboutPage() {
   );
 }
 
-function EnquiryPage() {
+function EnquiryPage({ cart }) {
   const [status, setStatus] = useState('');
   function handleSubmit(event) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const inbox = import.meta.env.VITE_ENQUIRY_EMAIL;
-    const subject = encodeURIComponent(`Website enquiry — ${form.get('topic')}`);
-    const body = encodeURIComponent(`Name: ${form.get('name')}\nEmail: ${form.get('email')}\nOrganisation: ${form.get('organisation') || 'Not provided'}\nArea of interest: ${form.get('topic')}\n\n${form.get('message')}`);
+    const materialLines = cart.map((item) => {
+      const product = materialProducts.find((entry) => entry.id === item.id);
+      return product ? `- ${product.name} | Requested amount: ${item.amount || 'Please advise'}` : null;
+    }).filter(Boolean).join('\n');
+    const subject = encodeURIComponent(`${cart.length ? 'Material quote request' : 'Website enquiry'} — ${form.get('topic')}`);
+    const body = encodeURIComponent(`Name: ${form.get('name')}\nEmail: ${form.get('email')}\nOrganisation: ${form.get('organisation') || 'Not provided'}\nArea of interest: ${form.get('topic')}\n${materialLines ? `\nMaterials requested:\n${materialLines}\n` : ''}\nProject details:\n${form.get('message')}`);
     if (inbox) {
       window.location.href = `mailto:${inbox}?subject=${subject}&body=${body}`;
       setStatus('Your email app is opening with your enquiry. Please send the message there to complete it.');
@@ -249,14 +332,14 @@ function EnquiryPage() {
     <main className="inner-page page-wrap enquiry-page">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Enquiry</span></div>
       <section className="enquiry-layout">
-        <div className="enquiry-copy"><Eyebrow>Start a conversation</Eyebrow><h1>What are you<br />working <em>on?</em></h1><p>Tell us a little about your project, material or testing needs. We’ll have a better place to start.</p><div className="enquiry-aside"><span className="aside-symbol">↗</span><span>Materials · Consumables<br />Testing · R&amp;D services</span></div></div>
+        <div className="enquiry-copy"><Eyebrow>{cart.length ? 'Material quote request' : 'Start a conversation'}</Eyebrow><h1>{cart.length ? <>Let’s price<br />your <em>materials.</em></> : <>What are you<br />working <em>on?</em></>}</h1><p>{cart.length ? 'Share your requirements and we’ll follow up to confirm grade, availability, pricing and lead time.' : 'Tell us a little about your project, material or testing needs. We’ll have a better place to start.'}</p>{cart.length > 0 && <div className="quote-summary"><span>YOUR BASKET · {cart.length} {cart.length === 1 ? 'ITEM' : 'ITEMS'}</span>{cart.map((item) => { const product = materialProducts.find((entry) => entry.id === item.id); return product && <p key={item.id}>{product.name}<small>{item.amount || 'Amount to be confirmed'}</small></p>; })}<a href="#materials">Edit basket <Arrow /></a></div>}<div className="enquiry-aside"><span className="aside-symbol">↗</span><span>Materials · Consumables<br />Testing · R&amp;D services</span></div></div>
         <form className="enquiry-form" onSubmit={handleSubmit}>
           <div className="form-row"><label>Your name<input name="name" autoComplete="name" required placeholder="Name" /></label><label>Email address<input name="email" type="email" autoComplete="email" required placeholder="you@organisation.com" /></label></div>
           <label>Organisation <span className="optional">OPTIONAL</span><input name="organisation" autoComplete="organization" placeholder="Company or institution" /></label>
-          <label>What can we help with?<select name="topic" defaultValue="" required><option value="" disabled>Select an area</option><option>Materials</option><option>Consumables</option><option>Electrochemical testing</option><option>R&amp;D services</option><option>Something else</option></select></label>
+          <label>What can we help with?<select name="topic" defaultValue={cart.length ? 'Materials' : ''} required><option value="" disabled>Select an area</option><option>Materials</option><option>Consumables</option><option>Electrochemical testing</option><option>R&amp;D services</option><option>Something else</option></select></label>
           <label>A few project details<textarea name="message" rows="5" required placeholder="A short note about your goals, requirements or timeline…" /></label>
-          <button className="button button-dark submit-button" type="submit">Prepare enquiry <Arrow diagonal /></button>
-          <p className="form-note">We’ll use these details only to respond to your enquiry. No backend is connected yet.</p>
+          <button className="button button-dark submit-button" type="submit">{cart.length ? 'Prepare quote request' : 'Prepare enquiry'} <Arrow diagonal /></button>
+          <p className="form-note">Submitting opens your email app when an enquiry inbox is configured. No payment is taken on this site.</p>
           {status && <p className="form-status" role="status">{status}</p>}
         </form>
       </section>
@@ -273,6 +356,24 @@ function SiteFooter() {
 export default function App() {
   const [active, setActive] = useState(() => window.location.hash.slice(1) || 'home');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [basketOpen, setBasketOpen] = useState(false);
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = JSON.parse(window.localStorage.getItem('strata-material-basket') || '[]');
+      return Array.isArray(saved) ? saved.filter((item) => item && materialProducts.some((product) => product.id === item.id)).map((item) => ({ id: item.id, amount: typeof item.amount === 'string' ? item.amount : '' })) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem('strata-material-basket', JSON.stringify(cart));
+  }, [cart]);
+
+  const addToBasket = (id) => setCart((current) => current.some((item) => item.id === id) ? current : [...current, { id, amount: '' }]);
+  const removeFromBasket = (id) => setCart((current) => current.filter((item) => item.id !== id));
+  const setRequestedAmount = (id, amount) => setCart((current) => current.map((item) => item.id === id ? { ...item, amount } : item));
+  const basketIds = cart.map((item) => item.id);
 
   useEffect(() => {
     const updateRoute = () => {
@@ -285,11 +386,28 @@ export default function App() {
     return () => window.removeEventListener('hashchange', updateRoute);
   }, []);
 
-  const content = active === 'home' ? <HomePage />
-    : pageCopy[active] ? <CategoryPage id={active} />
+  useEffect(() => {
+    if (!menuOpen && !basketOpen) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        setBasketOpen(false);
+      }
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [menuOpen, basketOpen]);
+
+  const content = active === 'home' ? <HomePage basketIds={basketIds} onAddToBasket={addToBasket} />
+    : active === 'materials' ? <MaterialsShop basketIds={basketIds} onAddToBasket={addToBasket} />
+      : pageCopy[active] ? <CategoryPage id={active} />
       : active === 'about' ? <AboutPage />
-        : active === 'enquiry' ? <EnquiryPage />
+        : active === 'enquiry' ? <EnquiryPage cart={cart} />
           : <HomePage />;
 
-  return <><SiteHeader active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />{content}<SiteFooter /></>;
+  return <><SiteHeader active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} cartCount={cart.length} onOpenCart={() => { setMenuOpen(false); setBasketOpen(true); }} />{content}<SiteFooter /><BasketDrawer open={basketOpen} cart={cart} onClose={() => setBasketOpen(false)} onRemove={removeFromBasket} onSetAmount={setRequestedAmount} /></>;
 }
