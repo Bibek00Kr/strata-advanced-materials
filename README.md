@@ -4,6 +4,10 @@ Responsive React and Vite website for Strata Advanced Materials.
 
 The Materials page is a quote-led storefront: visitors can search and filter material families, add selections to a persistent basket, enter requested amounts, and prepare a quote enquiry. Exact prices, grades, pack sizes, lead times, and stock are intentionally not invented; confirm those catalog details before launch. The site does not process payments.
 
+## Product catalog
+
+Catalog entries, featured materials, and homepage category descriptions are in `src/data/products.js`. Add confirmed product specifications as a `specifications` array of `[label, value]` pairs to replace the detail page placeholders.
+
 ## Run locally
 
 1. Install Node.js if needed.

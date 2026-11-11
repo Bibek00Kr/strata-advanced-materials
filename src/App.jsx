@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { featuredMaterials, materialProducts, shopCategories } from './data/products.js';
 
 const navigation = [
   ['home', 'Home'],
@@ -8,6 +9,14 @@ const navigation = [
   ['services', 'Services'],
   ['about', 'About us'],
 ];
+const pageRoutes = new Set([...navigation.map(([id]) => id), 'enquiry']);
+
+function pageFromHash(hash) {
+  const location = hash.split('?')[0] || 'home';
+  const [page, productId] = location.split('/');
+  if (page === 'product' && materialProducts.some((product) => product.id === productId)) return 'product';
+  return pageRoutes.has(page) ? page : 'home';
+}
 
 const categories = [
   {
@@ -83,14 +92,6 @@ const pageCopy = {
   },
 };
 
-const materialProducts = [
-  { id: 'graphene', family: 'Graphene', name: 'Graphene & related materials', type: 'Carbon nanomaterials', description: 'Graphene family materials for research into conductive networks, composites and electrochemical systems.', symbol: 'G', visual: 'graphene' },
-  { id: 'mxenes', family: 'MXenes', name: 'MXene materials', type: '2D materials', description: 'Two-dimensional carbide and nitride materials for energy storage and functional materials research.', symbol: 'M', visual: 'mxene' },
-  { id: 'ldhs', family: 'LDHs', name: 'Layered double hydroxides', type: 'Layered materials', description: 'Layered hydroxide material families for catalyst, electrode and materials studies.', symbol: 'L', visual: 'ldh' },
-  { id: 'mofs', family: 'MOFs', name: 'Metal–organic frameworks', type: 'Porous materials', description: 'Framework materials with tuneable composition for research and development applications.', symbol: 'F', visual: 'mof' },
-  { id: 'heterostructures', family: 'Heterostructures', name: 'Material heterostructures', type: 'Composite systems', description: 'Combined material systems for investigating interfaces and complementary properties.', symbol: 'H', visual: 'hetero' },
-];
-
 function Brand({ onClick }) {
   return (
     <a className="brand" href="#home" onClick={onClick} aria-label="Strata Advanced Materials home">
@@ -110,19 +111,19 @@ function MaterialArtwork() {
       <div className="artwork-topline"><span>STRUCTURE / 001</span><span>2D MATERIALS</span></div>
       <svg className="material-svg" viewBox="0 0 600 510" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
-          <linearGradient id="layerA" x1="94" y1="200" x2="493" y2="403" gradientUnits="userSpaceOnUse"><stop stopColor="#D6F267"/><stop offset="1" stopColor="#829B34"/></linearGradient>
-          <linearGradient id="layerB" x1="82" y1="155" x2="460" y2="351" gradientUnits="userSpaceOnUse"><stop stopColor="#EDF4C8"/><stop offset="1" stopColor="#B4C770"/></linearGradient>
-          <linearGradient id="layerC" x1="117" y1="122" x2="477" y2="305" gradientUnits="userSpaceOnUse"><stop stopColor="#8ECAC0"/><stop offset="1" stopColor="#367D73"/></linearGradient>
+          <linearGradient id="layerA" x1="94" y1="200" x2="493" y2="403" gradientUnits="userSpaceOnUse"><stop stopColor="#C47A4B"/><stop offset="1" stopColor="#A86F49"/></linearGradient>
+          <linearGradient id="layerB" x1="82" y1="155" x2="460" y2="351" gradientUnits="userSpaceOnUse"><stop stopColor="#E6EDF2"/><stop offset="1" stopColor="#AFC0CB"/></linearGradient>
+          <linearGradient id="layerC" x1="117" y1="122" x2="477" y2="305" gradientUnits="userSpaceOnUse"><stop stopColor="#9BB8C7"/><stop offset="1" stopColor="#436D85"/></linearGradient>
         </defs>
-        <g opacity=".35" stroke="#D8E0D4" strokeWidth="1"><path d="M48 100H548M48 150H548M48 200H548M48 250H548M48 300H548M48 350H548M48 400H548"/><path d="M100 52V455M160 52V455M220 52V455M280 52V455M340 52V455M400 52V455M460 52V455M520 52V455"/></g>
-        <path d="M109 268 304 167l186 94-195 105-186-98Z" fill="url(#layerA)" stroke="#E4F4A0" strokeWidth="2"/>
-        <path d="m109 222 195-101 186 94-195 105-186-98Z" fill="url(#layerB)" stroke="#F5F8DB" strokeWidth="2"/>
-        <path d="m109 177 195-101 186 94-195 105-186-98Z" fill="url(#layerC)" stroke="#B5E0D8" strokeWidth="2"/>
-        <g fill="#143A35" stroke="#D4E77A" strokeWidth="2"><circle cx="304" cy="76" r="7"/><circle cx="490" cy="170" r="7"/><circle cx="295" cy="275" r="7"/><circle cx="109" cy="177" r="7"/><circle cx="304" cy="121" r="7"/><circle cx="490" cy="215" r="7"/><circle cx="295" cy="320" r="7"/></g>
-        <path d="M421 91h89v49" stroke="#D8E0D4" strokeDasharray="4 5"/><circle cx="510" cy="91" r="4" fill="#D6F267"/>
-        <path d="M125 359H42v-52" stroke="#D8E0D4" strokeDasharray="4 5"/><circle cx="42" cy="359" r="4" fill="#D6F267"/>
-        <text x="420" y="77" fill="#EDF4C8" fontFamily="monospace" fontSize="11" letterSpacing="1">LAYERED LATTICE</text>
-        <text x="39" y="385" fill="#EDF4C8" fontFamily="monospace" fontSize="11" letterSpacing="1">INTERFACE</text>
+        <g opacity=".35" stroke="#D4DDE4" strokeWidth="1"><path d="M48 100H548M48 150H548M48 200H548M48 250H548M48 300H548M48 350H548M48 400H548"/><path d="M100 52V455M160 52V455M220 52V455M280 52V455M340 52V455M400 52V455M460 52V455M520 52V455"/></g>
+        <path d="M109 268 304 167l186 94-195 105-186-98Z" fill="url(#layerA)" stroke="#E0B890" strokeWidth="2"/>
+        <path d="m109 222 195-101 186 94-195 105-186-98Z" fill="url(#layerB)" stroke="#EDF2F5" strokeWidth="2"/>
+        <path d="m109 177 195-101 186 94-195 105-186-98Z" fill="url(#layerC)" stroke="#C8D9E2" strokeWidth="2"/>
+        <g fill="#1A354A" stroke="#D79970" strokeWidth="2"><circle cx="304" cy="76" r="7"/><circle cx="490" cy="170" r="7"/><circle cx="295" cy="275" r="7"/><circle cx="109" cy="177" r="7"/><circle cx="304" cy="121" r="7"/><circle cx="490" cy="215" r="7"/><circle cx="295" cy="320" r="7"/></g>
+        <path d="M421 91h89v49" stroke="#D4DDE4" strokeDasharray="4 5"/><circle cx="510" cy="91" r="4" fill="#C47A4B"/>
+        <path d="M125 359H42v-52" stroke="#D4DDE4" strokeDasharray="4 5"/><circle cx="42" cy="359" r="4" fill="#C47A4B"/>
+        <text x="420" y="77" fill="#E6EDF2" fontFamily="Inter, sans-serif" fontSize="11" letterSpacing="1">LAYERED LATTICE</text>
+        <text x="39" y="385" fill="#E6EDF2" fontFamily="Inter, sans-serif" fontSize="11" letterSpacing="1">INTERFACE</text>
       </svg>
       <div className="artwork-caption"><span>DESIGNED FOR DISCOVERY</span><span>INDIA · R&amp;D</span></div>
       <div className="artwork-orbit" aria-hidden="true">S<span>+</span></div>
@@ -177,22 +178,69 @@ function ProductArt({ product }) {
 function ProductCard({ product, inBasket, onAdd }) {
   return (
     <article className="product-card">
-      <ProductArt product={product} />
+      <a className="product-art-link" href={`#product/${product.id}`} aria-label={`View details for ${product.name}`}><ProductArt product={product} /></a>
       <div className="product-card-body">
         <div className="product-meta"><span>{product.type}</span><span className="quote-badge">Request pricing</span></div>
-        <h3>{product.name}</h3>
+        <h3><a className="product-title-link" href={`#product/${product.id}`}>{product.name}</a></h3>
         <p>{product.description}</p>
-        <div className="product-card-footer"><span className="product-family">{product.family}</span><button className={`add-button ${inBasket ? 'added' : ''}`} onClick={() => onAdd(product.id)}>{inBasket ? 'In basket' : 'Add to basket'} <Arrow /></button></div>
+        <div className="product-card-footer"><a className="product-family" href={`#product/${product.id}`}>View details <Arrow /></a><button className={`add-button ${inBasket ? 'added' : ''}`} onClick={() => onAdd(product.id)}>{inBasket ? 'In basket' : 'Add to basket'} <Arrow /></button></div>
       </div>
     </article>
   );
 }
 
-function FeaturedProducts({ basketIds, onAddToBasket }) {
+function FeaturedMaterialHero({ basketIds, onAddToBasket }) {
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const product = featuredMaterials[featuredIndex];
+  const showPrevious = () => setFeaturedIndex((featuredIndex + featuredMaterials.length - 1) % featuredMaterials.length);
+  const showNext = () => setFeaturedIndex((featuredIndex + 1) % featuredMaterials.length);
+
   return (
-    <section className="featured-shop page-wrap">
-      <div className="shop-section-head"><div><Eyebrow>Shop materials</Eyebrow><h2>Find your material<br /><em>starting point.</em></h2></div><a className="under-link" href="#materials">Browse all materials <Arrow /></a></div>
-      <div className="featured-product-grid">{materialProducts.slice(0, 3).map((product) => <ProductCard key={product.id} product={product} inBasket={basketIds.includes(product.id)} onAdd={onAddToBasket} />)}</div>
+    <section className="store-hero page-wrap">
+      <div className="store-hero-copy">
+        <Eyebrow>Advanced materials · Research supply</Eyebrow>
+        <h1>Materials for<br />what comes <span>next.</span></h1>
+        <p>Shop graphene, MXenes, MOFs and other advanced materials. Build your basket and request a quote for the specification you need.</p>
+        <a className="button button-dark" href="#home-catalogue">Shop materials <Arrow /></a>
+        <div className="hero-trust-line"><span>01</span><i /><span>Material families for research and development</span></div>
+      </div>
+      <article className="hero-feature" aria-live="polite">
+        <div className="hero-feature-image"><ProductArt product={product} /><span className="hero-feature-label"><i /> FEATURED MATERIAL / 0{featuredIndex + 1}</span></div>
+        <div className="hero-feature-body">
+          <div className="hero-feature-meta"><span>{product.type}</span><span>Pricing on request</span></div>
+          <h2>{product.name}</h2>
+          <p>{product.description}</p>
+          <div className="hero-feature-actions"><button className={`add-button ${basketIds.includes(product.id) ? 'added' : ''}`} onClick={() => onAddToBasket(product.id)}>{basketIds.includes(product.id) ? 'In basket' : 'Add to basket'} <Arrow /></button><a href={`#product/${product.id}`}>Details <Arrow diagonal /></a></div>
+          <div className="hero-carousel-controls"><button onClick={showPrevious} aria-label="Previous featured material">←</button><div>{featuredMaterials.map((item, index) => <button key={item.id} className={index === featuredIndex ? 'current' : ''} onClick={() => setFeaturedIndex(index)} aria-label={`Show ${item.name}`} aria-pressed={index === featuredIndex} />)}</div><button onClick={showNext} aria-label="Next featured material">→</button></div>
+        </div>
+      </article>
+    </section>
+  );
+}
+
+function HomeProductCatalogue({ basketIds, onAddToBasket }) {
+  const [search, setSearch] = useState('');
+  const [family, setFamily] = useState('All materials');
+  const families = ['All materials', ...materialProducts.map((product) => product.family)];
+  const visibleProducts = materialProducts.filter((product) => family === 'All materials' || product.family === family)
+    .filter((product) => `${product.name} ${product.type} ${product.description}`.toLowerCase().includes(search.toLowerCase()));
+
+  return (
+    <section className="home-product-catalogue page-wrap" id="home-catalogue">
+      <div className="shop-section-head"><div><Eyebrow>Shop Strata materials</Eyebrow><h2>Find your material<br /><em>starting point.</em></h2></div><a className="under-link" href="#materials">Open full catalogue <Arrow /></a></div>
+      <div className="catalogue-tools home-catalogue-tools"><label className="catalogue-search"><span aria-hidden="true">⌕</span><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search graphene, MXenes, MOFs…" aria-label="Search materials on homepage" /></label><span className="home-catalogue-note">{visibleProducts.length} material families · Request pricing</span></div>
+      <div className="filter-row" aria-label="Filter homepage materials">{families.map((item) => <button key={item} className={`filter-chip ${family === item ? 'selected' : ''}`} onClick={() => setFamily(item)} aria-pressed={family === item}>{item}</button>)}</div>
+      {visibleProducts.length ? <div className="home-products-grid">{visibleProducts.map((item) => <ProductCard key={item.id} product={item} inBasket={basketIds.includes(item.id)} onAdd={onAddToBasket} />)}</div> : <div className="no-products"><h2>No materials match that search.</h2><button className="text-link" onClick={() => { setSearch(''); setFamily('All materials'); }}>Clear filters <Arrow /></button></div>}
+      <div className="home-catalogue-foot"><span>Need a particular grade, form or quantity?</span><a href="#enquiry">Include it in a quote request <Arrow /></a></div>
+    </section>
+  );
+}
+
+function ShopByCategory() {
+  return (
+    <section className="shop-by-category page-wrap">
+      <div className="category-section-heading"><Eyebrow>Explore the range</Eyebrow><h2>Shop by category</h2><p>Browse advanced material families for your research and development work.</p></div>
+      <div className="shop-category-grid">{shopCategories.map((category) => <a className="shop-category-card" key={category.family} href={`#materials?family=${encodeURIComponent(category.family)}`}><h3>{category.title}</h3><p>{category.description}</p><span>View products <Arrow /></span></a>)}</div>
     </section>
   );
 }
@@ -201,19 +249,9 @@ function HomePage({ basketIds, onAddToBasket }) {
   return (
     <>
       <main>
-        <section className="home-hero page-wrap">
-          <div className="hero-copy">
-            <Eyebrow>Advanced materials · Made for research</Eyebrow>
-            <h1>Materials for<br />what comes <span>next.</span></h1>
-            <p className="hero-intro">Explore advanced material families for electrochemistry, energy storage and materials research. Tell us what you need and request a tailored quote.</p>
-            <div className="hero-actions"><a className="button button-dark" href="#materials">Shop material families <Arrow /></a><a className="text-link" href="#about">Meet Strata <Arrow diagonal /></a></div>
-            <div className="hero-note"><span className="note-rule" />Select a material. Request your grade and quantity.</div>
-          </div>
-          <MaterialArtwork />
-          <div className="hero-index"><span>01</span><span className="index-line" /><span>04</span></div>
-        </section>
-
-        <FeaturedProducts basketIds={basketIds} onAddToBasket={onAddToBasket} />
+        <FeaturedMaterialHero basketIds={basketIds} onAddToBasket={onAddToBasket} />
+        <ShopByCategory />
+        <HomeProductCatalogue basketIds={basketIds} onAddToBasket={onAddToBasket} />
 
         <section className="intro-band page-wrap">
           <div className="section-label"><span>01 — WHY STRATA</span><span>SCROLL TO EXPLORE ↓</span></div>
@@ -229,7 +267,7 @@ function HomePage({ basketIds, onAddToBasket }) {
 
         <section className="home-about page-wrap"><div className="about-visual"><div className="about-visual-grid"/><div className="about-stamp"><span>SCIENCE,</span><span>WITH INTENT.</span><i>SM</i></div><span className="visual-caption">MATERIALS / METHODS / MEASUREMENT</span></div><div className="about-summary"><Eyebrow>Made for collaboration</Eyebrow><h2>Research is a team sport.</h2><p>We believe useful progress comes from clear conversations, thoughtful material choices and technical work shaped around the question at hand.</p><a className="under-link" href="#about">Get to know Strata <Arrow /></a></div></section>
 
-        <section className="home-cta page-wrap"><div><Eyebrow>Have a project in mind?</Eyebrow><h2>Let’s find the right<br />starting point.</h2></div><a className="button button-lime" href="#enquiry">Tell us what you’re working on <Arrow diagonal /></a></section>
+        <section className="home-cta page-wrap"><div><Eyebrow>Have a project in mind?</Eyebrow><h2>Let’s find the right<br />starting point.</h2></div><a className="button button-accent" href="#enquiry">Tell us what you’re working on <Arrow diagonal /></a></section>
       </main>
     </>
   );
@@ -246,14 +284,17 @@ function CategoryPage({ id }) {
         <div className="inner-hero-card"><span className="inner-icon">{category.icon}</span><span className="inner-card-label">STRATA / CAPABILITY {category.number}</span><div className="inner-card-lines"><i /><i /><i /><i /></div><span className="inner-card-foot">{category.items.slice(0, 2).join('  ·  ')}</span></div>
       </section>
       <section className="offer-section"><div className="offer-heading"><Eyebrow>Explore the range</Eyebrow><h2>{page.kicker},<br /><em>considered carefully.</em></h2><p>{page.detail}</p></div><div className="offer-list">{page.offers.map(([title, text], index) => <article className="offer-row" key={title}><span className="offer-number">0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div><span className="offer-plus">+</span></article>)}</div></section>
-      <section className="page-bottom-cta"><div><span>HAVE A SPECIFIC REQUIREMENT?</span><h2>Let’s talk through the details.</h2></div><a className="button button-lime" href="#enquiry">Make an enquiry <Arrow diagonal /></a></section>
+      <section className="page-bottom-cta"><div><span>HAVE A SPECIFIC REQUIREMENT?</span><h2>Let’s talk through the details.</h2></div><a className="button button-accent" href="#enquiry">Make an enquiry <Arrow diagonal /></a></section>
     </main>
   );
 }
 
 function MaterialsShop({ basketIds, onAddToBasket }) {
   const [search, setSearch] = useState('');
-  const [family, setFamily] = useState('All materials');
+  const [family, setFamily] = useState(() => {
+    const requestedFamily = new URLSearchParams(window.location.hash.split('?')[1] || '').get('family');
+    return ['All materials', ...materialProducts.map((product) => product.family)].includes(requestedFamily) ? requestedFamily : 'All materials';
+  });
   const [sort, setSort] = useState('featured');
   const families = ['All materials', ...materialProducts.map((product) => product.family)];
   const visibleProducts = materialProducts
@@ -278,7 +319,47 @@ function MaterialsShop({ basketIds, onAddToBasket }) {
         {visibleProducts.length ? <div className="product-grid">{visibleProducts.map((product) => <ProductCard key={product.id} product={product} inBasket={basketIds.includes(product.id)} onAdd={onAddToBasket} />)}</div> : <div className="no-products"><h2>No materials match that search.</h2><p>Try another material name or clear the selected filter.</p><button className="text-link" onClick={() => { setSearch(''); setFamily('All materials'); }}>Clear filters <Arrow /></button></div>}
         <div className="catalogue-footnote"><span className="footnote-mark">i</span><p>Material grades, forms, quantities, lead times and pricing are confirmed for each request. Add items to your basket and include the details you need in the quote request.</p></div>
       </section>
-      <section className="page-bottom-cta"><div><span>NEED HELP CHOOSING?</span><h2>Tell us about your application.</h2></div><a className="button button-lime" href="#enquiry">Ask our team <Arrow diagonal /></a></section>
+      <section className="page-bottom-cta"><div><span>NEED HELP CHOOSING?</span><h2>Tell us about your application.</h2></div><a className="button button-accent" href="#enquiry">Ask our team <Arrow diagonal /></a></section>
+    </main>
+  );
+}
+
+function ProductDetailPage({ product, basketIds, onAddToBasket }) {
+  const relatedProducts = materialProducts.filter((item) => item.id !== product.id).slice(0, 3);
+  const specifications = product.specifications?.length ? product.specifications : [
+    ['Stock No.', 'To be added with the product listing'],
+    ['Purity / Grade', 'Confirm for the selected item'],
+    ['Form / Packing', 'To be confirmed'],
+    ['CAS No.', 'Item-specific; add with product documentation'],
+    ['Material family', product.family],
+  ];
+
+  return (
+    <main className="inner-page product-detail-page page-wrap">
+      <div className="breadcrumb"><a href="#home">Home</a><span>/</span><a href={`#materials?family=${encodeURIComponent(product.family)}`}>{product.family}</a><span>/</span><span>{product.name}</span></div>
+      <section className="product-detail-main">
+        <div className="product-detail-visual"><ProductArt product={product} /><span className="product-detail-visual-label">STRATA MATERIALS · {product.family.toUpperCase()}</span></div>
+        <div className="product-detail-info">
+          <Eyebrow>{product.type} · Material family listing</Eyebrow>
+          <h1>{product.name}</h1>
+          <p className="product-detail-summary">{product.description}</p>
+          <div className="product-price-panel"><span>Price &amp; availability</span><strong>Request a quote</strong><small>Confirmed against your required grade and quantity</small></div>
+          <div className="product-detail-actions"><button className="button button-dark" onClick={() => onAddToBasket(product.id)}>{basketIds.includes(product.id) ? 'Added to basket' : 'Add to basket'} <Arrow /></button><button className="button button-accent" onClick={() => { onAddToBasket(product.id); window.location.hash = 'enquiry'; }}>Request pricing <Arrow diagonal /></button></div>
+          <p className="product-data-note">Product-specific specifications will be added when Strata’s item list is supplied.</p>
+        </div>
+      </section>
+      <section className="product-specifications">
+        <div className="product-spec-heading"><Eyebrow>Product information</Eyebrow><h2>Specifications</h2></div>
+        <div className="specification-table">{specifications.map(([label, value], index) => <div className={`specification-row ${index % 2 ? 'alternate' : ''}`} key={label}><strong>{label}</strong><span>{value}</span></div>)}</div>
+      </section>
+      <section className="product-description-grid">
+        <div><Eyebrow>Product detail</Eyebrow><h2>About {product.name}</h2></div>
+        <div><p>{product.description}</p><p>This is a category-level listing while the individual products are being prepared. Add the exact product name, stock number, specifications, description and available forms to publish a complete product page.</p><div className="shipping-note"><strong>Ordering information</strong><span>Pricing, stock, lead time and delivery details are confirmed with the quote.</span></div></div>
+      </section>
+      <section className="related-products-section">
+        <div className="related-products-heading"><div><Eyebrow>Keep exploring</Eyebrow><h2>Related items</h2></div><a className="under-link" href="#materials">View all materials <Arrow /></a></div>
+        <div className="related-products-grid">{relatedProducts.map((item) => <ProductCard key={item.id} product={item} inBasket={basketIds.includes(item.id)} onAdd={onAddToBasket} />)}</div>
+      </section>
     </main>
   );
 }
@@ -304,7 +385,7 @@ function AboutPage() {
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>About us</span></div>
       <section className="about-page-hero"><Eyebrow>About Strata</Eyebrow><h1>Science moves<br />when people <em>connect.</em></h1><p>Strata Advanced Materials is built around a simple idea: make advanced materials and electrochemical know-how easier to bring into the lab.</p></section>
       <section className="about-values"><div className="values-aside"><span>OUR POINT OF VIEW</span><div className="values-symbol">S<span>↗</span></div></div><div className="values-content"><h2>Curiosity needs<br /><em>good company.</em></h2><p>Whether you are exploring a new material, developing a cell or planning a test, the details matter. We aim to make those conversations practical, clear and collaborative.</p><div className="value-points"><article><span>01</span><h3>Start with the question</h3><p>Understand the goal before recommending a material, method or service.</p></article><article><span>02</span><h3>Make it practical</h3><p>Keep the next step clear, scoped and connected to the real work.</p></article><article><span>03</span><h3>Build together</h3><p>Good outcomes come from open communication at every stage.</p></article></div></div></section>
-      <section className="page-bottom-cta"><div><span>LET’S MAKE SOMETHING USEFUL</span><h2>Bring us your next question.</h2></div><a className="button button-lime" href="#enquiry">Start a conversation <Arrow diagonal /></a></section>
+      <section className="page-bottom-cta"><div><span>LET’S MAKE SOMETHING USEFUL</span><h2>Bring us your next question.</h2></div><a className="button button-accent" href="#enquiry">Start a conversation <Arrow diagonal /></a></section>
     </main>
   );
 }
@@ -354,7 +435,8 @@ function SiteFooter() {
 }
 
 export default function App() {
-  const [active, setActive] = useState(() => window.location.hash.slice(1) || 'home');
+  const [routeLocation, setRouteLocation] = useState(() => window.location.hash.slice(1) || 'home');
+  const active = pageFromHash(routeLocation);
   const [menuOpen, setMenuOpen] = useState(false);
   const [basketOpen, setBasketOpen] = useState(false);
   const [cart, setCart] = useState(() => {
@@ -378,9 +460,9 @@ export default function App() {
   useEffect(() => {
     const updateRoute = () => {
       const next = window.location.hash.slice(1) || 'home';
-      setActive(next);
+      setRouteLocation(next);
       setMenuOpen(false);
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      if (pageRoutes.has(next.split('?')[0]) || pageFromHash(next) === 'product') window.scrollTo({ top: 0, behavior: 'auto' });
     };
     window.addEventListener('hashchange', updateRoute);
     return () => window.removeEventListener('hashchange', updateRoute);
@@ -403,11 +485,15 @@ export default function App() {
   }, [menuOpen, basketOpen]);
 
   const content = active === 'home' ? <HomePage basketIds={basketIds} onAddToBasket={addToBasket} />
-    : active === 'materials' ? <MaterialsShop basketIds={basketIds} onAddToBasket={addToBasket} />
+    : active === 'materials' ? <MaterialsShop key={routeLocation} basketIds={basketIds} onAddToBasket={addToBasket} />
+      : active === 'product' ? <ProductDetailPage key={routeLocation} product={materialProducts.find((item) => item.id === routeLocation.split('/')[1]?.split('?')[0])} basketIds={basketIds} onAddToBasket={addToBasket} />
       : pageCopy[active] ? <CategoryPage id={active} />
       : active === 'about' ? <AboutPage />
         : active === 'enquiry' ? <EnquiryPage cart={cart} />
           : <HomePage />;
 
-  return <><SiteHeader active={active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} cartCount={cart.length} onOpenCart={() => { setMenuOpen(false); setBasketOpen(true); }} />{content}<SiteFooter /><BasketDrawer open={basketOpen} cart={cart} onClose={() => setBasketOpen(false)} onRemove={removeFromBasket} onSetAmount={setRequestedAmount} /></>;
+  return <><SiteHeader active={active === 'product' ? 'materials' : active} menuOpen={menuOpen} setMenuOpen={setMenuOpen} cartCount={cart.length} onOpenCart={() => { setMenuOpen(false); setBasketOpen(true); }} />{content}<SiteFooter /><BasketDrawer open={basketOpen} cart={cart} onClose={() => setBasketOpen(false)} onRemove={removeFromBasket} onSetAmount={setRequestedAmount} /></>;
 }
+
+
+
