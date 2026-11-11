@@ -358,7 +358,7 @@ function ProductDetailPage({ product, basketIds, onAddToBasket }) {
       </section>
       <section className="related-products-section">
         <div className="related-products-heading"><div><Eyebrow>Keep exploring</Eyebrow><h2>Related items</h2></div><a className="under-link" href="#materials">View all materials <Arrow /></a></div>
-        <div className="related-products-grid">{relatedProducts.map((item) => <ProductCard key={item.id} product={item} inBasket={basketIds.includes(item.id)} onAdd={onAddToBasket} />)}</div>
+        <div className="related-products-grid" role="region" aria-label="Related materials" tabIndex={0}>{relatedProducts.map((item) => <ProductCard key={item.id} product={item} inBasket={basketIds.includes(item.id)} onAdd={onAddToBasket} />)}</div>
       </section>
     </main>
   );
