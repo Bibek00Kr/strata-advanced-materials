@@ -1,0 +1,486 @@
+.art-carbon {
+  background: #EAE9E4;
+  color: #596C73
+}
+
+.art-carbon>span {
+  border-color: #8C9896;
+  color: #53666C
+}
+
+.art-carbon>i {
+  border-color: rgba(90, 111, 116, .3)
+}
+
+.art-carbon>b {
+  background: #9B8065;
+  box-shadow: 190px 72px #9B8065, 135px -3px #9B8065, 45px 126px #9B8065
+}
+
+.home-page .store-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 540px;
+  padding-top: 58px;
+  padding-bottom: 58px;
+  grid-template-columns: 1fr .88fr;
+  gap: clamp(34px, 6vw, 82px)
+}
+
+.hero-background-art {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: -2%;
+  bottom: 0;
+  width: 68%;
+  overflow: hidden;
+  pointer-events: none
+}
+
+.hero-background-art.has-product-image {
+  background-color: var(--paper);
+  background-image: var(--hero-product-image);
+  background-blend-mode: normal, multiply;
+  background-size: 100% 100%, auto 94%;
+  background-position: center, 98% center;
+  background-repeat: no-repeat
+}
+
+.hero-background-art:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--paper) 0%, rgba(247, 249, 252, .9) 17%, rgba(247, 249, 252, .2) 58%, rgba(247, 249, 252, .04) 100%)
+}
+
+.hero-background-art .product-art {
+  height: 100%;
+  min-height: 460px;
+  background: transparent !important;
+  opacity: .76
+}
+
+.hero-background-art .product-art:before {
+  background-size: 32px 32px;
+  opacity: .64
+}
+
+.hero-background-art .product-art>span {
+  width: clamp(150px, 20vw, 250px);
+  height: clamp(150px, 20vw, 250px);
+  font-size: clamp(54px, 7vw, 82px)
+}
+
+.hero-background-art .product-art>i {
+  width: min(31vw, 390px);
+  height: 100px;
+  top: calc(50% - 50px);
+  left: calc(50% - min(15.5vw, 195px))
+}
+
+.hero-background-art .product-art>i:nth-of-type(3) {
+  width: min(38vw, 480px);
+  height: 150px;
+  top: calc(50% - 75px);
+  left: calc(50% - min(19vw, 240px))
+}
+
+.home-page .store-hero-copy,
+.home-page .hero-feature {
+  position: relative;
+  z-index: 1
+}
+
+.home-page .store-hero-copy h1 {
+  max-width: 620px;
+  font-size: clamp(52px, 6vw, 76px)
+}
+
+.home-page .store-hero-copy>p {
+  max-width: 430px;
+  font-size: 14px
+}
+
+.home-page .hero-feature {
+  align-self: end;
+  justify-self: end;
+  width: min(100%, 450px);
+  margin-top: 105px;
+  background: rgba(255, 255, 255, .86);
+  border: 1px solid rgba(210, 220, 228, .84);
+  box-shadow: 0 18px 48px rgba(28, 47, 64, .1);
+  backdrop-filter: blur(14px)
+}
+
+.home-page .hero-feature-body {
+  padding: 19px 21px 14px
+}
+
+.home-page .hero-feature-label {
+  position: static;
+  width: fit-content;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+  background: rgba(243, 246, 248, .82)
+}
+
+.home-page .hero-feature-body h2 {
+  margin-top: 9px
+}
+
+.home-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 26px
+}
+
+.home-hero-actions .button {
+  min-width: 176px;
+  justify-content: space-between
+}
+
+.home-offerings {
+  padding-top: 16px;
+  padding-bottom: 55px
+}
+
+.home-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 19px
+}
+
+.home-section-heading h2 {
+  margin: 12px 0 0;
+  color: #203A50;
+  font: 650 clamp(27px, 3vw, 35px)/1.15 Inter, sans-serif;
+  letter-spacing: -.04em
+}
+
+.home-section-heading>p {
+  max-width: 330px;
+  margin: 0 0 3px;
+  color: #68798B;
+  font-size: 12px;
+  line-height: 1.65
+}
+
+.home-offerings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px
+}
+
+.home-offering-card {
+  min-width: 0;
+  min-height: 195px;
+  padding: 21px 21px 17px;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid #DCE3E8;
+  transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease
+}
+
+.home-offering-card:hover {
+  transform: translateY(-2px);
+  border-color: #B7C7D2;
+  box-shadow: 0 9px 22px rgba(28, 47, 64, .06)
+}
+
+.home-offering-number {
+  color: #A36F4A;
+  font: 10px var(--mono);
+  letter-spacing: .07em
+}
+
+.home-offering-card h3 {
+  margin: 18px 0 7px;
+  color: #203A50;
+  font: 650 17px/1.3 Inter, sans-serif;
+  letter-spacing: -.02em
+}
+
+.home-offering-card p {
+  margin: 0 0 15px;
+  color: #68798B;
+  font-size: 11px;
+  line-height: 1.6
+}
+
+.home-offering-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 11px;
+  border-top: 1px solid #E3E8ED;
+  color: #2F6683;
+  font-size: 10px;
+  font-weight: 700
+}
+
+.home-specialty {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 34px;
+  margin-bottom: 64px;
+  padding: 29px 31px;
+  background: #E8EDF2;
+  border: 1px solid #DCE3E8
+}
+
+.home-specialty-copy h2 {
+  max-width: 500px;
+  margin: 14px 0 9px;
+  color: #203A50;
+  font: 650 clamp(25px, 3vw, 34px)/1.15 Inter, sans-serif;
+  letter-spacing: -.04em
+}
+
+.home-specialty-copy>p {
+  max-width: 460px;
+  margin: 0 0 16px;
+  color: #68798B;
+  font-size: 12px;
+  line-height: 1.65
+}
+
+.home-specialty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px
+}
+
+.home-specialty-enquiry {
+  color: #68798B;
+  font-size: 11px;
+  font-weight: 600
+}
+
+.home-chemical-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px
+}
+
+.home-chemical-list>span {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid #D7E0E8;
+  color: #203A50;
+  font: 650 16px Inter, sans-serif;
+  letter-spacing: .025em
+}
+
+.home-collaborate {
+  background: #203A50;
+  color: #F3F5F7
+}
+
+.home-collaborate-inner {
+  min-height: 230px;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  align-items: center;
+  gap: 44px;
+  padding-top: 35px;
+  padding-bottom: 35px
+}
+
+.home-collaborate .eyebrow {
+  color: #C4CFD8
+}
+
+.home-collaborate .eyebrow-dot {
+  background: #C47A4B
+}
+
+.home-collaborate h2 {
+  margin: 15px 0 9px;
+  color: #FFFFFF;
+  font: 650 clamp(31px, 4vw, 45px)/1.12 Inter, sans-serif;
+  letter-spacing: -.045em
+}
+
+.home-collaborate-inner>div:first-child>p {
+  max-width: 510px;
+  margin: 0;
+  color: #C4CFD8;
+  font-size: 12px;
+  line-height: 1.7
+}
+
+.home-collaborate-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px
+}
+
+.home-collaborate-actions .button {
+  min-width: 220px;
+  justify-content: space-between
+}
+
+.home-services-link {
+  color: #D1DCE3;
+  font-size: 11px;
+  font-weight: 600
+}
+
+.home-services-link .arrow {
+  margin-left: 6px
+}
+
+@media(max-width:800px) {
+  .home-page .store-hero {
+    grid-template-columns: 1fr;
+    gap: 29px;
+    padding-top: 44px;
+    padding-bottom: 42px
+  }
+
+  .hero-background-art {
+    top: 8%;
+    right: -12%;
+    bottom: 15%;
+    width: 100%;
+    opacity: .62
+  }
+
+  .hero-background-art:after {
+    background: linear-gradient(180deg, rgba(247, 249, 252, .12), rgba(247, 249, 252, .56) 65%, var(--paper) 100%)
+  }
+
+  .hero-background-art.has-product-image {
+    background-size: 100% 100%, auto 78%;
+    background-position: center, 92% center
+  }
+
+  .home-page .store-hero-copy h1 {
+    font-size: clamp(48px, 10vw, 68px)
+  }
+
+  .home-page .hero-feature {
+    max-width: 620px;
+    width: 100%;
+    justify-self: center;
+    margin-top: 8px
+  }
+
+  .home-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px
+  }
+
+  .home-section-heading>p {
+    max-width: 470px
+  }
+
+  .home-specialty {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 24px
+  }
+
+  .home-chemical-list>span {
+    min-height: 65px
+  }
+
+  .home-collaborate-inner {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-top: 37px;
+    padding-bottom: 39px
+  }
+
+  .home-collaborate-actions {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 17px
+  }
+}
+
+@media(max-width:520px) {
+  .home-page .store-hero {
+    padding-top: 34px
+  }
+
+  .home-page .store-hero-copy h1 {
+    font-size: 48px
+  }
+
+  .home-hero-actions {
+    gap: 16px;
+  }
+
+  .home-hero-actions .button {
+    min-width: 165px
+  }
+
+  .home-offerings {
+    padding-top: 9px;
+    padding-bottom: 38px
+  }
+
+  .home-offerings-grid {
+    grid-template-columns: 1fr;
+    gap: 10px
+  }
+
+  .home-offering-card {
+    min-height: 0;
+    padding: 16px 16px 13px
+  }
+
+  .home-offering-card h3 {
+    margin-top: 12px;
+    font-size: 15px
+  }
+
+  .home-specialty {
+    gap: 17px;
+    margin-bottom: 40px;
+    padding: 20px 17px
+  }
+
+  .home-chemical-list span {
+    min-height: 58px;
+    font-size: 14px
+  }
+
+  .home-collaborate-inner {
+    gap: 18px
+  }
+
+  .home-collaborate-actions {
+    flex-direction: column;
+    align-items: stretch
+  }
+
+  .home-collaborate-actions .button {
+    width: 100%
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .home-offering-card {
+    transition: none !important
+  }
+}

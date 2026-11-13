@@ -1,0 +1,386 @@
+.testing-page,
+.consumables-page {
+  padding-bottom: 82px
+}
+
+.testing-heading,
+.consumables-heading {
+  align-items: end
+}
+
+.testing-heading h1,
+.consumables-heading h1 {
+  max-width: 700px;
+  font-size: clamp(44px, 5.6vw, 68px)
+}
+
+.testing-page .shop-heading p,
+.consumables-page .shop-heading p {
+  max-width: 610px
+}
+
+.testing-service-block,
+.testing-pricing-section {
+  padding: 47px 0 49px;
+  border-bottom: 1px solid #DCE3E8
+}
+
+.testing-section-heading,
+.catalog-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 23px
+}
+
+.testing-section-heading h2,
+.catalog-section-heading h2,
+.testing-inquiry-copy h2 {
+  margin: 13px 0 0;
+  color: #203A50;
+  font: 650 clamp(28px, 3.6vw, 40px)/1.14 Inter, sans-serif;
+  letter-spacing: -.04em
+}
+
+.testing-section-heading>p {
+  max-width: 420px;
+  margin: 0 0 2px;
+  color: #68798B;
+  font-size: 12px;
+  line-height: 1.7
+}
+
+.testing-method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px
+}
+
+.testing-method-card {
+  min-height: 190px;
+  padding: 20px 21px 18px;
+  background: #FFFFFF;
+  border: 1px solid #DCE3E8;
+  border-top: 3px solid #3D718B
+}
+
+.testing-method-card>span {
+  color: #A36F4A;
+  font: 10px var(--mono);
+  letter-spacing: .08em
+}
+
+.testing-method-card h3 {
+  margin: 19px 0 8px;
+  color: #203A50;
+  font: 650 16px/1.35 Inter, sans-serif
+}
+
+.testing-method-card p {
+  margin: 0;
+  color: #68798B;
+  font-size: 11px;
+  line-height: 1.65
+}
+
+.electrolyte-note {
+  display: flex;
+  gap: 13px;
+  margin-top: 17px;
+  padding: 17px 19px;
+  background: #E8EDF2;
+  border-left: 3px solid #C47A4B
+}
+
+.electrolyte-note-mark {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #B8C4CF;
+  border-radius: 50%;
+  color: #42677D;
+  font: 600 12px Inter, sans-serif
+}
+
+.electrolyte-note strong {
+  color: #31465A;
+  font-size: 12px
+}
+
+.electrolyte-note p {
+  margin: 5px 0 0;
+  color: #68798B;
+  font-size: 11px;
+  line-height: 1.7
+}
+
+.her-method-list {
+  border-top: 1px solid #DCE3E8
+}
+
+.her-method-row {
+  min-height: 57px;
+  display: grid;
+  grid-template-columns: 42px 1fr 65px;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid #DCE3E8
+}
+
+.her-method-row>span,
+.her-method-row>small {
+  color: #6D7D8F;
+  font: 10px var(--mono)
+}
+
+.her-method-row>span {
+  color: #A36F4A
+}
+
+.her-method-row strong {
+  color: #31465A;
+  font-size: 13px
+}
+
+.her-method-row>small {
+  justify-self: end;
+  padding: 5px 7px;
+  background: #E8EDF2
+}
+
+.her-scope-note {
+  margin: 15px 0 0;
+  color: #68798B;
+  font-size: 11px;
+  line-height: 1.65
+}
+
+.testing-pricing-section {
+  padding-bottom: 55px
+}
+
+.charge-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #DCE3E8;
+  background: #FFFFFF;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch
+}
+
+.charge-table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  text-align: left
+}
+
+.charge-table th,
+.charge-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid #E3E8ED;
+  color: #52677C;
+  font-size: 11px;
+  line-height: 1.5
+}
+
+.charge-table thead th {
+  background: #E8EDF2;
+  color: #31465A;
+  font-size: 10px;
+  font-weight: 700
+}
+
+.charge-table tbody th {
+  color: #31465A;
+  font-weight: 650
+}
+
+.charge-table tbody tr:last-child th,
+.charge-table tbody tr:last-child td {
+  border-bottom: 0
+}
+
+.charge-badge {
+  display: inline-flex;
+  padding: 6px 8px;
+  background: #F3F6F8;
+  color: #2F6683;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap
+}
+
+.testing-inquiry-section {
+  display: grid;
+  grid-template-columns: .78fr 1.22fr;
+  align-items: start;
+  gap: 52px;
+  padding-top: 55px
+}
+
+.testing-inquiry-copy h2 {
+  margin: 16px 0 12px
+}
+
+.testing-inquiry-copy>p {
+  max-width: 390px;
+  color: #68798B;
+  font-size: 12px;
+  line-height: 1.75
+}
+
+.service-inquiry-form {
+  gap: 16px
+}
+
+.service-inquiry-form .form-row {
+  gap: 13px
+}
+
+.catalog-section {
+  padding: 43px 0 45px;
+  border-bottom: 1px solid #DCE3E8
+}
+
+.catalog-section-heading {
+  margin-bottom: 20px
+}
+
+.catalog-section-heading>span {
+  color: #7C8997;
+  font-size: 10px;
+  white-space: nowrap
+}
+
+.catalog-section .product-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+}
+
+.specialty-catalog-section {
+  padding-bottom: 50px
+}
+
+.availability-note {
+  margin: 16px 0 0;
+  padding: 13px 15px;
+  background: #E8EDF2;
+  color: #68798B;
+  font-size: 11px;
+  line-height: 1.65
+}
+
+.consumables-page .page-bottom-cta {
+  margin-top: 40px
+}
+
+@media(max-width:900px) {
+  .testing-heading,
+  .consumables-heading {
+    align-items: flex-start
+  }
+
+  .testing-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px
+  }
+
+  .testing-inquiry-section {
+    grid-template-columns: 1fr;
+    gap: 22px
+  }
+}
+
+@media(max-width:800px) {
+  .testing-method-grid {
+    grid-template-columns: 1fr
+  }
+
+  .testing-method-card {
+    min-height: 0
+  }
+
+  .testing-section-heading>p {
+    max-width: 540px
+  }
+
+  .catalog-section .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  }
+}
+
+@media(max-width:520px) {
+  .testing-heading h1,
+  .consumables-heading h1 {
+    font-size: 43px
+  }
+
+  .testing-page,
+  .consumables-page {
+    padding-bottom: 54px
+  }
+
+  .testing-service-block,
+  .testing-pricing-section,
+  .catalog-section {
+    padding-top: 34px;
+    padding-bottom: 36px
+  }
+
+  .testing-section-heading h2,
+  .catalog-section-heading h2,
+  .testing-inquiry-copy h2 {
+    font-size: 29px
+  }
+
+  .her-method-row {
+    grid-template-columns: 30px minmax(0, 1fr) 48px;
+    gap: 8px
+  }
+
+  .her-method-row strong {
+    font-size: 11px
+  }
+
+  .electrolyte-note {
+    padding: 14px 12px
+  }
+
+  .charge-table th,
+  .charge-table td {
+    padding: 12px
+  }
+
+  .testing-inquiry-section {
+    padding-top: 37px
+  }
+
+  .service-inquiry-form {
+    padding: 19px 14px
+  }
+
+  .service-inquiry-form .form-row {
+    grid-template-columns: 1fr
+  }
+
+  .catalog-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px
+  }
+
+  .catalog-section-heading>span {
+    white-space: normal
+  }
+
+  .catalog-section .product-grid {
+    grid-template-columns: 1fr
+  }
+
+  .consumables-page .page-bottom-cta {
+    margin-top: 28px
+  }
+}
