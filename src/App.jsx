@@ -332,9 +332,7 @@ function ConsumablesAndChemicalsPage({ basketIds, onAddToBasket }) {
   return (
     <main className="inner-page page-wrap consumables-page">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Consumables &amp; Specialty Chemicals</span></div>
-      <section className="shop-heading consumables-heading">
-        <div><Eyebrow>Laboratory supply</Eyebrow><h1>Consumables &amp; chemicals</h1><p>Add items to your basket to request pricing.</p></div>
-      </section>
+      <h1 className="visually-hidden">Consumables &amp; specialty chemicals</h1>
       <section className="catalog-section" id="consumable-products" aria-labelledby="consumables-title">
         <div className="catalog-section-heading"><div><Eyebrow>01 · Lab essentials</Eyebrow><h2 id="consumables-title">Consumables</h2></div><span>{consumableProducts.length} listed products · Pricing on request</span></div>
         <div className="product-grid">{consumableProducts.map((product) => <ProductCard key={product.id} product={product} inBasket={basketIds.includes(product.id)} onAdd={onAddToBasket} />)}</div>

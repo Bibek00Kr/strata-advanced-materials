@@ -1589,6 +1589,20 @@ main h3,
   outline-offset: 3px
 }
 
+body,
+body * {
+  -webkit-user-select: none;
+  user-select: none
+}
+
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text
+}
+
 @media(max-width:800px) {
   .page-wrap {
     width: calc(100% - 48px)
@@ -2153,7 +2167,8 @@ main h3,
     font-size: clamp(36px, 9vw, 46px) !important
   }
 
-  .shop-page .catalogue {
+  .shop-page .catalogue,
+  .consumables-page .catalog-section {
     padding-top: 18px
   }
 
@@ -2163,12 +2178,14 @@ main h3,
     gap: 4px
   }
 
-  .shop-page .product-grid {
+  .shop-page .product-grid,
+  .consumables-page .product-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 10px
   }
 
-  .shop-page .product-card {
+  .shop-page .product-card,
+  .consumables-page .product-card {
     display: grid;
     grid-template-columns: minmax(104px, 36%) minmax(0, 1fr);
     min-height: 164px;
@@ -2176,40 +2193,47 @@ main h3,
     box-shadow: none
   }
 
-  .shop-page .product-card .product-art-link {
+  .shop-page .product-card .product-art-link,
+  .consumables-page .product-card .product-art-link {
     height: 100%;
     min-height: 164px;
     background: #F1F4F6
   }
 
-  .shop-page .product-card .product-art {
+  .shop-page .product-card .product-art,
+  .consumables-page .product-card .product-art {
     width: 100%;
     height: 100%;
     min-height: 164px
   }
 
-  .shop-page .product-card .product-art-has-image>img {
+  .shop-page .product-card .product-art-has-image>img,
+  .consumables-page .product-card .product-art-has-image>img {
     padding: 6px
   }
 
-  .shop-page .product-card-body {
+  .shop-page .product-card-body,
+  .consumables-page .product-card-body {
     min-width: 0;
     padding: 10px 10px 9px
   }
 
-  .shop-page .product-meta {
+  .shop-page .product-meta,
+  .consumables-page .product-meta {
     align-items: flex-start;
     flex-direction: column;
     gap: 4px;
     font-size: 9px !important
   }
 
-  .shop-page .product-meta .quote-badge {
+  .shop-page .product-meta .quote-badge,
+  .consumables-page .product-meta .quote-badge {
     padding: 3px 5px;
     font-size: 9px !important
   }
 
-  .shop-page .product-card h3 {
+  .shop-page .product-card h3,
+  .consumables-page .product-card h3 {
     display: -webkit-box;
     overflow: hidden;
     margin: 7px 0 5px;
@@ -2219,7 +2243,8 @@ main h3,
     -webkit-line-clamp: 2
   }
 
-  .shop-page .product-card p {
+  .shop-page .product-card p,
+  .consumables-page .product-card p {
     display: -webkit-box;
     overflow: hidden;
     min-height: 0;
@@ -2230,17 +2255,20 @@ main h3,
     -webkit-line-clamp: 2
   }
 
-  .shop-page .product-card-footer {
+  .shop-page .product-card-footer,
+  .consumables-page .product-card-footer {
     margin-top: auto;
     padding-top: 5px;
     border-top: 0
   }
 
-  .shop-page .product-card-footer .product-family {
+  .shop-page .product-card-footer .product-family,
+  .consumables-page .product-card-footer .product-family {
     display: none
   }
 
-  .shop-page .product-card-footer .add-button {
+  .shop-page .product-card-footer .add-button,
+  .consumables-page .product-card-footer .add-button {
     width: 100%;
     min-height: 32px;
     justify-content: center;
