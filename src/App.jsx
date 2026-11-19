@@ -365,9 +365,7 @@ function MaterialsShop({ basketIds, onAddToBasket }) {
   return (
     <main className="inner-page shop-page page-wrap">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Materials</span></div>
-      <section className="shop-heading">
-        <div><Eyebrow>Materials</Eyebrow><h1>Shop materials</h1><p>Select products and request a quote for your grade and quantity.</p></div>
-      </section>
+      <h1 className="visually-hidden">Shop materials</h1>
       <section className="catalogue" aria-label="Material catalogue">
         <div className="catalogue-tools">
           <label className="catalogue-search"><span aria-hidden="true">⌕</span><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search materials" aria-label="Search materials" /></label>
