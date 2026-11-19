@@ -122,64 +122,44 @@ function ProductCard({ product, inBasket, onAdd }) {
   );
 }
 
-function FeaturedMaterialHero({ basketIds, onAddToBasket }) {
-  const [featuredIndex, setFeaturedIndex] = useState(0);
-  const product = featuredMaterials[featuredIndex];
-  const heroImage = '/assets/products/Graphene-Based%20Materials.webp';
-  const showPrevious = () => setFeaturedIndex((featuredIndex + featuredMaterials.length - 1) % featuredMaterials.length);
-  const showNext = () => setFeaturedIndex((featuredIndex + 1) % featuredMaterials.length);
-
+function FeaturedMaterialHero() {
   return (
     <section className="store-hero page-wrap">
-      <div className="hero-background-art has-product-image" style={{ '--hero-product-image': `url("${heroImage}")` }} aria-hidden="true">
-      </div>
       <div className="store-hero-copy">
-        <Eyebrow>Advanced materials · Research supply</Eyebrow>
-        <h1>Materials for<br />what comes <span>next.</span></h1>
-        <p>Source advanced materials and lab consumables, with electrochemical testing and technical support for your research.</p>
+        <Eyebrow>Advanced materials · India supply</Eyebrow>
+        <h1>Materials for<br />research.</h1>
+        <p>Advanced materials, lab consumables and electrochemical testing for research.</p>
         <div className="home-hero-actions"><a className="button button-dark" href="#materials">Shop materials <Arrow /></a></div>
       </div>
+      <img className="store-hero-image" src="/assets/hero-india-supply.png" alt="Strata advanced materials and research supplies, serving laboratories across India." fetchPriority="high" />
     </section>
   );
 }
 
 function HomeOfferings() {
   const offerings = [
-    { number: '02', icon: 'testing', image: '/assets/products/Electrochemical%20Testing.webp', title: 'Electrochemical testing', description: 'Explore measurement options and discuss a test plan for your sample.', action: 'Explore testing', href: '#testing' },
-    { number: '03', icon: 'consumables', image: '/assets/products/Consumables.webp', title: 'Consumables', description: 'Find electrodes, electrolytes, separators and cell components for your work.', action: 'Explore products', href: '#consumables' },
+    { number: '01', image: '/assets/products/Graphene-Based%20Materials.webp', title: 'Materials', description: 'Graphene, MXenes, LDHs and carbon.', action: 'Shop materials', href: '#materials' },
+    { number: '02', image: '/assets/products/Electrochemical%20Testing.webp', title: 'Electrochemical testing', description: 'CV, GCD, EIS and HER testing.', action: 'Explore testing', href: '#testing' },
+    { number: '03', image: '/assets/products/Consumables.webp', title: 'Consumables', description: 'Electrodes, coin cells and lab supplies.', action: 'Explore products', href: '#consumables' },
   ];
 
   return (
     <section className="home-offerings page-wrap" aria-labelledby="home-offerings-title">
-      <div className="home-section-heading"><div><Eyebrow>Start with what you need</Eyebrow><h2 id="home-offerings-title">Explore Strata</h2></div><p>Choose a path and find the right starting point for your research.</p></div>
+      <div className="home-section-heading"><h2 id="home-offerings-title">Explore our range</h2></div>
       <div className="home-offerings-grid">
-        <a className="home-offering-card home-offering-feature-card" href="#materials">
-          <span className="home-offering-card-media" aria-hidden="true">
-            <img src="/assets/products/Graphene-Based%20Materials.webp" alt="" loading="lazy" decoding="async" />
-          </span>
-          <span className="home-offering-card-copy">
-            <span className="home-offering-number">01 / MATERIALS</span>
-            <h3>Materials</h3>
-            <p>Graphene, MXenes, LDHs, activated carbon and charcoal for research.</p>
-            <span className="home-offering-link">Shop materials<Arrow /></span>
-          </span>
-        </a>
-        <div className="home-offering-secondary">
-          {offerings.map((item) => (
-            <a className="home-offering-card home-offering-support-card" href={item.href} key={item.number}>
-              <span className="home-offering-card-media home-offering-card-media-support" aria-hidden="true">
-                <img src={item.image} alt="" loading="lazy" decoding="async" />
-              </span>
-              <span className="home-offering-card-top">
-                <OfferingIcon type={item.icon} />
-                <span className="home-offering-number">{item.number}<span> / 03</span></span>
-              </span>
+        {offerings.map((item) => (
+          <a className="home-offering-card" href={item.href} key={item.number}>
+            <span className="home-offering-card-media" aria-hidden="true">
+              <img src={item.image} alt="" loading="lazy" decoding="async" />
+            </span>
+            <span className="home-offering-card-copy">
+              
               <h3>{item.title}</h3>
               <p>{item.description}</p>
               <span className="home-offering-link">{item.action}<Arrow /></span>
-            </a>
-          ))}
-        </div>
+            </span>
+          </a>
+        ))}
       </div>
     </section>
   );
@@ -188,12 +168,12 @@ function HomeOfferings() {
 function HomeSpecialtyChemicals() {
   return (
     <section className="home-specialty page-wrap" id="specialty-chemicals" aria-labelledby="home-specialty-title">
-      <div className="home-specialty-copy"><Eyebrow>Specialty chemicals</Eyebrow><h2 id="home-specialty-title">Looking for a specific compound?</h2><p>Ask us about specialty chemical requirements, including these requested compounds.</p><div className="home-specialty-actions"><a className="under-link" href="#consumables">Browse products <Arrow /></a><a className="home-specialty-enquiry" href="#enquiry">Enquire about availability</a></div></div>
+      <div className="home-specialty-copy"><h2 id="home-specialty-title">Specialty chemicals</h2><p>TBAAB, CTMATB and other reagents on request.</p><div className="home-specialty-actions"><a className="under-link" href="#consumables">Browse chemicals <Arrow /></a><a className="home-specialty-enquiry" href="#enquiry">Ask about availability</a></div></div>
       <div className="home-chemical-list" aria-label="Specialty chemical examples">
         {['TBAAB', 'CTMATB'].map((name) => (
           <a className="home-chemical-card" href="#enquiry" key={name} aria-label={`Enquire about ${name}`}>
             <span className="home-chemical-icon"><MoleculeIcon /></span>
-            <span className="home-chemical-card-copy"><strong>{name}</strong><small>Availability on request</small></span>
+            <span className="home-chemical-card-copy"><strong>{name}</strong></span>
             <Arrow diagonal />
           </a>
         ))}
@@ -205,7 +185,7 @@ function HomeSpecialtyChemicals() {
 function HomeCollaborate() {
   return (
     <section className="home-collaborate">
-      <div className="home-collaborate-inner page-wrap"><div><Eyebrow>Custom support · Collaboration</Eyebrow><h2>Want to collaborate?</h2><p>Tell us what you are working on. We can discuss custom synthesis, electrode fabrication, testing or a material requirement.</p></div><div className="home-collaborate-actions"><a className="button button-accent" href="#services">Fill in the collaboration form <Arrow diagonal /></a><a className="home-services-link" href="#about">Meet the team <Arrow /></a></div></div>
+      <div className="home-collaborate-inner page-wrap"><div><h2>Have a project in mind?</h2><p>Custom synthesis, electrode fabrication and testing.</p></div><div className="home-collaborate-actions"><a className="button button-accent" href="#services">Discuss a project <Arrow diagonal /></a></div></div>
     </section>
   );
 }
@@ -213,7 +193,7 @@ function HomeCollaborate() {
 function HomePage({ basketIds, onAddToBasket }) {
   return (
     <main className="home-page">
-        <FeaturedMaterialHero basketIds={basketIds} onAddToBasket={onAddToBasket} />
+        <FeaturedMaterialHero />
         <HomeOfferings />
         <HomeSpecialtyChemicals />
         <HomeCollaborate />
@@ -233,9 +213,9 @@ function CollaborationForm() {
 
     if (inbox) {
       window.location.href = `mailto:${inbox}?subject=${subject}&body=${body}`;
-      setStatus('Your email app is opening with your collaboration enquiry. Send the message there to complete it.');
+      setStatus('Your email app is ready. Send the message to finish.');
     } else {
-      setStatus('Your collaboration enquiry is ready. Add VITE_ENQUIRY_EMAIL to the site environment to route it to the Strata inbox.');
+      setStatus('Enquiry prepared. Configure the site email to send it to Strata.');
     }
   }
 
@@ -246,7 +226,7 @@ function CollaborationForm() {
       <label>What would you like to collaborate on?<select name="project" defaultValue="" required><option value="" disabled>Select an area</option><option>Custom synthesis</option><option>Electrode fabrication</option><option>Electrochemical testing</option><option>Materials supply</option><option>Other project idea</option></select></label>
       <label>Tell us about your idea<textarea name="details" rows="5" required placeholder="What are you working on, and how would you like to collaborate?" /></label>
       <button className="button button-dark submit-button" type="submit">Send collaboration enquiry <Arrow diagonal /></button>
-      <p className="form-note">We’ll use your note to start a conversation about the project and a practical next step.</p>
+      <p className="form-note">We’ll follow up about next steps.</p>
       {status && <p className="form-status" role="status">{status}</p>}
     </form>
   );
@@ -256,16 +236,16 @@ function CollaborationPage() {
   return (
     <main className="inner-page page-wrap collaboration-page">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Collaborate</span></div>
-      <section className="collaboration-intro"><div><Eyebrow>Custom support · Collaboration</Eyebrow><h1>Want to collaborate?</h1><p>We are excited to be a part of it. Fill in the form to tell us about your idea, your goals and the kind of support you are looking for.</p></div></section>
-      <section className="collaboration-form-section" aria-label="Collaboration form"><div className="collaboration-form-heading"><Eyebrow>Collaboration form</Eyebrow><h2>Tell us what you have in mind.</h2></div><CollaborationForm /></section>
+      <section className="collaboration-intro"><div><Eyebrow>Collaboration</Eyebrow><h1>Let’s work together.</h1><p>Tell us about your project and the support you need.</p></div></section>
+      <section className="collaboration-form-section" aria-label="Collaboration form"><div className="collaboration-form-heading"><h2>Project details</h2></div><CollaborationForm /></section>
     </main>
   );
 }
 
 const testingMethods = [
-  { code: 'CV', name: 'Cyclic Voltammetry', description: 'Assess electrochemical response across an agreed potential window and scan rate.' },
-  { code: 'GCD', name: 'Galvanostatic Charge–Discharge', description: 'Review charge–discharge behaviour using an agreed current and test protocol.' },
-  { code: 'EIS', name: 'Electrochemical Impedance Spectroscopy', description: 'Measure impedance response, with equivalent-circuit fitting included in the service scope.' },
+  { code: 'CV', name: 'Cyclic Voltammetry', description: 'Measure response across an agreed potential range.' },
+  { code: 'GCD', name: 'Galvanostatic Charge–Discharge', description: 'Evaluate charge and discharge at agreed currents.' },
+  { code: 'EIS', name: 'Electrochemical Impedance Spectroscopy', description: 'Measure impedance with equivalent-circuit fitting.' },
 ];
 
 const herMethods = [
@@ -286,9 +266,9 @@ function ServiceInquiryForm() {
 
     if (inbox) {
       window.location.href = `mailto:${inbox}?subject=${subject}&body=${body}`;
-      setStatus('Your email app is opening with your service enquiry. Send the message there to complete it.');
+      setStatus('Your email app is ready. Send the message to finish.');
     } else {
-      setStatus('Your enquiry is ready. Add VITE_ENQUIRY_EMAIL to the site environment to route it to the Strata inbox.');
+      setStatus('Enquiry prepared. Configure the site email to send it to Strata.');
     }
   }
 
@@ -299,7 +279,7 @@ function ServiceInquiryForm() {
       <div className="form-row"><label>Sample or material <span className="optional">OPTIONAL</span><input name="sample" placeholder="Material and sample details" /></label><label>Target voltage window <span className="optional">OPTIONAL</span><input name="voltage" placeholder="e.g. up to 3.0 V" /></label></div>
       <label>Project details<textarea name="details" rows="5" required placeholder="Tell us about your sample, objective and any test conditions you have in mind…" /></label>
       <button className="button button-dark submit-button" type="submit">Request a service quote <Arrow diagonal /></button>
-      <p className="form-note">Scope and charges are confirmed with you before testing is arranged.</p>
+      <p className="form-note">Scope and charges are agreed before testing.</p>
       {status && <p className="form-status" role="status">{status}</p>}
     </form>
   );
@@ -320,29 +300,28 @@ function TestingServicesPage() {
     <main className="inner-page page-wrap testing-page">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Electrochemical testing</span></div>
       <section className="shop-heading testing-heading">
-        <div><Eyebrow>Electrochemical testing services</Eyebrow><h1>Testing, planned around your research.</h1><p>Discuss supercapacitor evaluation or a complete Hydrogen Evolution Reaction test solution. Methods, sample requirements and reporting are agreed before work begins.</p></div>
-        <div className="shop-promise"><span>01 / SHARE YOUR GOAL</span><span>02 / AGREE THE SCOPE</span><span>03 / REQUEST A QUOTE</span></div>
+        <div><Eyebrow>Electrochemical testing</Eyebrow><h1>Testing services</h1><p>Supercapacitor CV, GCD and EIS, plus complete HER testing.</p></div>
       </section>
 
       <section className="testing-service-block" aria-labelledby="supercapacitor-title">
-        <div className="testing-section-heading"><div><Eyebrow>01 · Supercapacitor</Eyebrow><h2 id="supercapacitor-title">Supercapacitor testing</h2></div><p>Choose individual methods or discuss a combined evaluation for your electrode and cell configuration.</p></div>
+        <div className="testing-section-heading"><div><Eyebrow>Supercapacitor</Eyebrow><h2 id="supercapacitor-title">Supercapacitor testing</h2></div><p>Choose a method or combine tests for your electrode.</p></div>
         <div className="testing-method-grid">{testingMethods.map((method) => <article className="testing-method-card" key={method.code}><span>{method.code}</span><h3>{method.name}</h3><p>{method.description}</p></article>)}</div>
-        <aside className="electrolyte-note"><span className="electrolyte-note-mark">i</span><div><strong>Electrolyte options</strong><p>Aqueous and ionic-liquid electrolytes are available. Options can support operating windows up to 3.0 V, with some systems up to 3.2 V; suitability depends on the material and cell setup and is confirmed during scoping.</p></div></aside>
+        <aside className="electrolyte-note"><span className="electrolyte-note-mark">i</span><div><strong>Electrolytes</strong><p>Aqueous and ionic-liquid options are available. Some systems support up to 3.2 V; suitability depends on the cell setup.</p></div></aside>
       </section>
 
       <section className="testing-service-block her-service-block" aria-labelledby="her-title">
-        <div className="testing-section-heading"><div><Eyebrow>02 · Hydrogen Evolution Reaction</Eyebrow><h2 id="her-title">A complete HER solution</h2></div><p>Combine the requested electrochemical methods into one scoped service for your catalyst and test conditions.</p></div>
+        <div className="testing-section-heading"><div><Eyebrow>Hydrogen evolution</Eyebrow><h2 id="her-title">HER testing</h2></div><p>LSV, EIS and chronoamperometry for catalyst evaluation.</p></div>
         <div className="her-method-list">{herMethods.map((method, index) => <article className="her-method-row" key={method.code}><span>0{index + 1}</span><strong>{method.name}</strong><small>{method.code}</small></article>)}</div>
-        <p className="her-scope-note">Sample handling, cell configuration, test parameters and reporting are discussed before the service is confirmed.</p>
+        <p className="her-scope-note">Sample, test conditions and reporting are agreed before work begins.</p>
       </section>
 
       <section className="testing-pricing-section" aria-labelledby="testing-pricing-title">
-        <div className="testing-section-heading"><div><Eyebrow>Pricing &amp; charges</Eyebrow><h2 id="testing-pricing-title">Request a scoped quote.</h2></div><p>Charges depend on the method, sample, test conditions and reporting requirements. The table shows available service lines; pricing is confirmed by enquiry.</p></div>
+        <div className="testing-section-heading"><div><Eyebrow>Pricing</Eyebrow><h2 id="testing-pricing-title">Request a quote</h2></div><p>Pricing depends on the method and test requirements.</p></div>
         <div className="charge-table-wrap"><table className="charge-table"><thead><tr><th scope="col">Service</th><th scope="col">Methods included</th><th scope="col">Charges*</th></tr></thead><tbody>{chargeRows.map(([service, methods, charge]) => <tr key={service}><th scope="row">{service}</th><td>{methods}</td><td><span className="charge-badge">{charge}</span></td></tr>)}</tbody></table></div>
       </section>
 
       <section className="testing-inquiry-section" id="testing-enquiry" aria-labelledby="testing-enquiry-title">
-        <div className="testing-inquiry-copy"><Eyebrow>Service enquiry</Eyebrow><h2 id="testing-enquiry-title">Tell us what you need to measure.</h2><p>Share the material, objective and conditions you have in mind. The team can follow up to scope a suitable service and quote.</p></div>
+        <div className="testing-inquiry-copy"><Eyebrow>Service enquiry</Eyebrow><h2 id="testing-enquiry-title">Request testing</h2><p>Share your sample and test requirements.</p></div>
         <ServiceInquiryForm />
       </section>
     </main>
@@ -354,8 +333,7 @@ function ConsumablesAndChemicalsPage({ basketIds, onAddToBasket }) {
     <main className="inner-page page-wrap consumables-page">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Consumables &amp; Specialty Chemicals</span></div>
       <section className="shop-heading consumables-heading">
-        <div><Eyebrow>Laboratory supply</Eyebrow><h1>Consumables &amp; specialty chemicals.</h1><p>Browse the current list of cell components, laboratory consumables and specialty chemicals. Add products to your basket to request pricing and availability.</p></div>
-        <div className="shop-promise"><span>01 / SELECT ITEMS</span><span>02 / ADD REQUIREMENTS</span><span>03 / REQUEST A QUOTE</span></div>
+        <div><Eyebrow>Laboratory supply</Eyebrow><h1>Consumables &amp; chemicals</h1><p>Add items to your basket to request pricing.</p></div>
       </section>
       <section className="catalog-section" id="consumable-products" aria-labelledby="consumables-title">
         <div className="catalog-section-heading"><div><Eyebrow>01 · Lab essentials</Eyebrow><h2 id="consumables-title">Consumables</h2></div><span>{consumableProducts.length} listed products · Pricing on request</span></div>
@@ -388,8 +366,7 @@ function MaterialsShop({ basketIds, onAddToBasket }) {
     <main className="inner-page shop-page page-wrap">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Materials</span></div>
       <section className="shop-heading">
-        <div><Eyebrow>Material catalogue</Eyebrow><h1>Shop materials.</h1><p>Browse the material families, add your selections to the basket and request pricing for your required grade and quantity.</p></div>
-        <div className="shop-promise"><span>01 / SELECT</span><span>02 / SPECIFY</span><span>03 / GET A QUOTE</span></div>
+        <div><Eyebrow>Materials</Eyebrow><h1>Shop materials</h1><p>Select products and request a quote for your grade and quantity.</p></div>
       </section>
       <section className="catalogue" aria-label="Material catalogue">
         <div className="catalogue-tools">
@@ -399,7 +376,7 @@ function MaterialsShop({ basketIds, onAddToBasket }) {
         <div className="filter-row" aria-label="Filter by material family">{families.map((item) => <button key={item} className={`filter-chip ${family === item ? 'selected' : ''}`} onClick={() => setFamily(item)} aria-pressed={family === item}>{item}</button>)}</div>
         <div className="catalogue-count">Showing {visibleProducts.length} {visibleProducts.length === 1 ? 'material product' : 'material products'} <span>Pricing and availability confirmed by quote</span></div>
         {visibleProducts.length ? <div className="product-grid">{visibleProducts.map((product) => <ProductCard key={product.id} product={product} inBasket={basketIds.includes(product.id)} onAdd={onAddToBasket} />)}</div> : <div className="no-products"><h2>No materials match that search.</h2><p>Try another material name or clear the selected filter.</p><button className="text-link" onClick={() => { setSearch(''); setFamily('All materials'); }}>Clear filters <Arrow /></button></div>}
-        <div className="catalogue-footnote"><span className="footnote-mark">i</span><p>Material grades, forms, quantities, lead times and pricing are confirmed for each request. Add items to your basket and include the details you need in the quote request.</p></div>
+        <div className="catalogue-footnote"><span className="footnote-mark">i</span><p>Include grade, form and quantity in your quote request.</p></div>
       </section>
       <section className="page-bottom-cta"><div><span>NEED HELP CHOOSING?</span><h2>Tell us about your application.</h2></div><a className="button button-accent" href="#enquiry">Ask our team <Arrow diagonal /></a></section>
     </main>
@@ -425,10 +402,9 @@ function ProductDetailPage({ product, basketIds, onAddToBasket }) {
         <div className="product-detail-info">
           <Eyebrow>{product.type} · {product.catalogLabel} listing</Eyebrow>
           <h1>{product.name}</h1>
-          <p className="product-detail-summary">{product.description}</p>
           <div className="product-price-panel"><span>Price &amp; availability</span><strong>Request a quote</strong><small>Confirmed against your required grade and quantity</small></div>
           <div className="product-detail-actions"><button className="button button-dark" onClick={() => onAddToBasket(product.id)}>{basketIds.includes(product.id) ? 'Added to basket' : 'Add to basket'} <Arrow /></button><button className="button button-accent" onClick={() => { onAddToBasket(product.id); window.location.hash = 'enquiry'; }}>Request pricing <Arrow diagonal /></button></div>
-          <p className="product-data-note">Technical details such as grade, form and packaging are confirmed for the selected item.</p>
+          <p className="product-data-note">Grade, form and pack size confirmed by quote.</p>
         </div>
       </section>
       <section className="product-specifications">
@@ -437,7 +413,7 @@ function ProductDetailPage({ product, basketIds, onAddToBasket }) {
       </section>
       <section className="product-description-grid">
         <div><Eyebrow>Product detail</Eyebrow><h2>About {product.name}</h2></div>
-        <div><p>{product.description}</p><p>Include your required grade, form and quantity in your enquiry so availability and pricing can be confirmed for this item.</p><div className="shipping-note"><strong>Ordering information</strong><span>Pricing, stock, lead time and delivery details are confirmed with the quote.</span></div></div>
+        <div><p>{product.description}</p><div className="shipping-note"><strong>Ordering</strong><span>Price, stock and delivery confirmed by quote.</span></div></div>
       </section>
       <section className="related-products-section">
         <div className="related-products-heading"><div><Eyebrow>Keep exploring</Eyebrow><h2>Related items</h2></div><a className="under-link" href={catalogueHref}>View all {product.catalogLabel.toLowerCase()} <Arrow /></a></div>
@@ -466,8 +442,8 @@ function AboutPage() {
   return (
     <main className="inner-page page-wrap about-page">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>About us</span></div>
-      <section className="about-page-hero"><Eyebrow>About Strata</Eyebrow><h1>Advanced materials<br />for <em>research.</em></h1><p>Strata Advanced Materials supplies advanced materials and electrochemical testing support for research and development.</p></section>
-      <section className="team-section" aria-labelledby="team-title"><div className="team-heading"><div><Eyebrow>About us · Team</Eyebrow><h2 id="team-title">The people behind Strata</h2></div></div><div className="team-grid"><article className="team-card"><span>01 / TEAM</span><h3>Dr. Suraj Kumar</h3></article><article className="team-card"><span>02 / TEAM</span><h3>Priyakshi Bora</h3></article><article className="team-card"><span>03 / TEAM</span><h3>Amit Mukherjee</h3></article></div></section>
+      <section className="about-page-hero"><Eyebrow>About Strata</Eyebrow><h1>Materials for<br />research.</h1><p>Advanced materials and electrochemical testing for research.</p></section>
+      <section className="team-section" aria-labelledby="team-title"><div className="team-heading"><div><h2 id="team-title">Our team</h2></div></div><div className="team-grid"><article className="team-card"><span>TEAM</span><h3>Dr. Suraj Kumar</h3></article><article className="team-card"><span>TEAM</span><h3>Priyakshi Bora</h3></article><article className="team-card"><span>TEAM</span><h3>Amit Mukherjee</h3></article></div></section>
     </main>
   );
 }
@@ -486,23 +462,23 @@ function EnquiryPage({ cart }) {
     const body = encodeURIComponent(`Name: ${form.get('name')}\nEmail: ${form.get('email')}\nOrganisation: ${form.get('organisation') || 'Not provided'}\nArea of interest: ${form.get('topic')}\n${itemLines ? `\nItems requested:\n${itemLines}\n` : ''}\nProject details:\n${form.get('message')}`);
     if (inbox) {
       window.location.href = `mailto:${inbox}?subject=${subject}&body=${body}`;
-      setStatus('Your email app is opening with your enquiry. Please send the message there to complete it.');
+      setStatus('Your email app is ready. Send the message to finish.');
     } else {
-      setStatus('Thanks — the form is ready. Add VITE_ENQUIRY_EMAIL to your environment settings to route enquiries to your inbox.');
+      setStatus('Enquiry prepared. Configure the site email to send it to Strata.');
     }
   }
   return (
     <main className="inner-page page-wrap enquiry-page">
       <div className="breadcrumb"><a href="#home">Home</a><span>/</span><span>Enquiry</span></div>
       <section className="enquiry-layout">
-        <div className="enquiry-copy"><Eyebrow>{cart.length ? 'Product quote request' : 'Start a conversation'}</Eyebrow><h1>{cart.length ? <>Let’s price<br />your <em>selection.</em></> : <>What are you<br />working <em>on?</em></>}</h1><p>{cart.length ? 'Share your requirements and we’ll follow up to confirm availability, pricing and lead time.' : 'Tell us a little about your project, material or testing needs. We’ll have a better place to start.'}</p>{cart.length > 0 && <div className="quote-summary"><span>YOUR BASKET · {cart.length} {cart.length === 1 ? 'ITEM' : 'ITEMS'}</span>{cart.map((item) => { const product = catalogProducts.find((entry) => entry.id === item.id); return product && <p key={item.id}>{product.name}<small>{item.amount || 'Amount to be confirmed'}</small></p>; })}<a href="#materials">Edit basket <Arrow /></a></div>}<div className="enquiry-aside"><span className="aside-symbol">↗</span><span>Materials · Consumables<br />Testing · Specialty chemicals</span></div></div>
+        <div className="enquiry-copy"><Eyebrow>{cart.length ? 'Product quote' : 'Enquiry'}</Eyebrow><h1>{cart.length ? <>Request a<br />quote.</> : <>How can we<br />help?</>}</h1><p>{cart.length ? 'Confirm your requirements; we’ll reply with pricing and availability.' : 'Ask about materials, testing or collaboration.'}</p>{cart.length > 0 && <div className="quote-summary"><span>{cart.length} {cart.length === 1 ? 'ITEM' : 'ITEMS'}</span>{cart.map((item) => { const product = catalogProducts.find((entry) => entry.id === item.id); return product && <p key={item.id}>{product.name}<small>{item.amount || 'Amount to be confirmed'}</small></p>; })}<a href="#materials">Edit basket <Arrow /></a></div>}</div>
         <form className="enquiry-form" onSubmit={handleSubmit}>
           <div className="form-row"><label>Your name<input name="name" autoComplete="name" required placeholder="Name" /></label><label>Email address<input name="email" type="email" autoComplete="email" required placeholder="you@organisation.com" /></label></div>
           <label>Organisation <span className="optional">OPTIONAL</span><input name="organisation" autoComplete="organization" placeholder="Company or institution" /></label>
           <label>What can we help with?<select name="topic" defaultValue={cart.length ? 'Materials and products' : ''} required><option value="" disabled>Select an area</option><option>Materials</option><option>Consumables</option><option>Specialty chemicals</option><option>Electrochemical testing</option><option>Collaboration</option><option>Materials and products</option><option>R&amp;D services</option><option>Something else</option></select></label>
           <label>A few project details<textarea name="message" rows="5" required placeholder="A short note about your goals, requirements or timeline…" /></label>
           <button className="button button-dark submit-button" type="submit">{cart.length ? 'Prepare quote request' : 'Prepare enquiry'} <Arrow diagonal /></button>
-          <p className="form-note">Submitting opens your email app when an enquiry inbox is configured. No payment is taken on this site.</p>
+          <p className="form-note">Your email app opens to send the enquiry. No payment is taken.</p>
           {status && <p className="form-status" role="status">{status}</p>}
         </form>
       </section>
@@ -512,7 +488,7 @@ function EnquiryPage({ cart }) {
 
 function SiteFooter() {
   return (
-    <footer className="site-footer"><div className="footer-main page-wrap"><div className="footer-brand"><Brand /><p>Advanced materials.<br />Thoughtful science.</p></div><div className="footer-links"><span>EXPLORE</span>{navigation.slice(1).map(([id, label]) => <a href={`#${id}`} key={id}>{label}</a>)}</div><div className="footer-contact"><span>HAVE A QUESTION?</span><p>Still have questions?<br />Ask us.</p><a className="footer-enquiry" href="#enquiry">Ask us <Arrow diagonal /></a></div></div><div className="site-footnote page-wrap"><span aria-hidden="true">*</span><p>Product specifications, availability and service charges are confirmed for each enquiry.</p></div><div className="footer-bottom page-wrap"><span>© {new Date().getFullYear()} Strata Advanced Materials</span><span>Built for discovery <i>✳</i></span></div></footer>
+    <footer className="site-footer"><div className="footer-main page-wrap"><div className="footer-brand"><Brand /><p>Advanced materials, lab consumables and electrochemical testing to support research across India.</p></div><div className="footer-links"><span>EXPLORE</span>{navigation.slice(1).map(([id, label]) => <a href={`#${id}`} key={id}>{label}</a>)}</div><div className="footer-contact"><span>QUESTIONS?</span><a className="footer-enquiry" href="#enquiry">Ask us <Arrow diagonal /></a></div></div><div className="site-footnote page-wrap"><p>Prices and specifications are confirmed by quote.</p></div><div className="footer-bottom page-wrap"><span>© {new Date().getFullYear()} Strata Advanced Materials</span></div></footer>
   );
 }
 
