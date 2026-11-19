@@ -1915,7 +1915,7 @@ select,
   flex-direction: column;
   padding: 20px 22px 18px;
   border: 0;
-  border-radius: 0;
+  border-radius: 5px;
   background: #FFFFFF;
   box-shadow: none;
   backdrop-filter: none
@@ -1996,7 +1996,10 @@ select,
   display: block;
   grid-column: 2;
   grid-row: 1;
-  width: 100%;
+  width: 130%;
+  max-width: none;
+  min-width: 0;
+  justify-self: center;
   height: auto;
   aspect-ratio: 3 / 2;
   object-fit: contain;
@@ -2033,7 +2036,9 @@ select,
 
   .store-hero-image {
     grid-column: 1;
-    grid-row: 1
+    grid-row: 1;
+    width: 100%;
+    max-width: 100%
   }
 
   .home-page .store-hero-copy {
@@ -2064,9 +2069,9 @@ select,
 /* Keep the hero artwork and copy in separate, readable columns. */
 .home-page .store-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
   align-items: center;
-  gap: clamp(28px, 4vw, 64px);
+  gap: clamp(24px, 3vw, 48px);
   overflow: visible
 }
 

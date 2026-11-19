@@ -126,7 +126,6 @@ function FeaturedMaterialHero() {
   return (
     <section className="store-hero page-wrap">
       <div className="store-hero-copy">
-        <Eyebrow>Advanced materials · India supply</Eyebrow>
         <h1>Materials for<br />research.</h1>
         <p>Advanced materials, lab consumables and electrochemical testing for research.</p>
         <div className="home-hero-actions"><a className="button button-dark" href="#materials">Shop materials <Arrow /></a></div>
